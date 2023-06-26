@@ -1,7 +1,7 @@
 import SwiftUI
 import AVFoundation
 
-struct MeetingView: View {
+struct ListenerView: View {
     @Binding var drawable: Drawable
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
@@ -9,29 +9,28 @@ struct MeetingView: View {
     private var player: AVPlayer { AVPlayer.sharedDingPlayer }
     
     var body: some View {
-            Label("Speak", systemImage: "mic.circle.fill")
-                .font(.title)
-                Button(action: {
-                    if !isRecording {
-                        startDraw()
-                    } else {
-                        endDraw()
-                    }
-                }) {
-                    Text(isRecording ? "Stop" : "Record")
-                        .foregroundColor(.white)
-
-                }
-                .buttonStyle(.borderedProminent)
+        TextField("Enter prompt", text: $drawable.prompt)
+        Button(action: {
+            if !isRecording {
+                startListen()
+            } else {
+                endListen()
+            }
+        }) {
+            Image(systemName: isRecording ? "stop.fill" : "waveform")
+                .foregroundColor(.secondary)
+        }
+//            .modifier(TextFieldListenButton(text: isRecording))
+                    .textFieldStyle(.roundedBorder)
     }
     
-    private func startDraw() {
+    private func startListen() {
         speechRecognizer.resetTranscript()
         speechRecognizer.startTranscribing()
         isRecording = true
     }
     
-    private func endDraw() {
+    private func endListen() {
         speechRecognizer.stopTranscribing()
         isRecording = false
         let newHistory = History(transcript: speechRecognizer.transcript)
@@ -43,5 +42,42 @@ struct MeetingView: View {
 //struct MeetingView_Previews: PreviewProvider {
 //    static var previews: some View {
 ////        MeetingView(scrum: .constant(DailyScrum.sampleData[0]))
+//    }
+//}
+
+//struct TextFieldListenButton: ViewModifier {
+//    @Binding var isRecording: String
+//
+//    func body(content: Content) -> some View {
+//        HStack {
+//            content
+//
+////            if !text.isEmpty {
+//                Button(action: {
+//                    if !isRecording {
+//                        startListen()
+//                    } else {
+//                        endListen()
+//                    }
+//                }) {
+//                    Image(systemName: "waveform")
+//                                                .foregroundColor(Color(UIColor.opaqueSeparator))
+////                    Label("Speak", systemImage: "mic.circle.fill")
+////                        .font(.title)
+//                    //                    Text(isRecording ? "Stop" : "Record")
+////                        .foregroundColor(.white)
+//
+//                }
+////                .buttonStyle(.borderedProminent)
+//
+////                Button(
+////                    action: { self.text = "" },
+////                    label: {
+////                        Image(systemName: "delete.left")
+////                            .foregroundColor(Color(UIColor.opaqueSeparator))
+////                    }
+////                )
+////            }
+//        }
 //    }
 //}

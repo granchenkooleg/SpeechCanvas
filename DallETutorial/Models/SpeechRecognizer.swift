@@ -44,9 +44,9 @@ actor SpeechRecognizer: ObservableObject {
                 guard await SFSpeechRecognizer.hasAuthorizationToRecognize() else {
                     throw RecognizerError.notAuthorizedToRecognize
                 }
-                guard await AVAudioSession.sharedInstance().hasPermissionToRecord() else {
-                    throw RecognizerError.notPermittedToRecord
-                }
+//                guard await AVAudioSession.sharedInstance().hasPermissionToRecord() else {
+//                    throw RecognizerError.notPermittedToRecord
+//                }
             } catch {
                 transcribe(error)
             }
@@ -111,9 +111,9 @@ actor SpeechRecognizer: ObservableObject {
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
         
-        let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
-        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+//        let audioSession = AVAudioSession.sharedInstance()
+//        try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
+//        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = audioEngine.inputNode
         
         let recordingFormat = inputNode.outputFormat(forBus: 0)
@@ -169,12 +169,12 @@ extension SFSpeechRecognizer {
     }
 }
 
-extension AVAudioSession {
-    func hasPermissionToRecord() async -> Bool {
-        await withCheckedContinuation { continuation in
-            requestRecordPermission { authorized in
-                continuation.resume(returning: authorized)
-            }
-        }
-    }
-}
+//extension AVAudioSession {
+//    func hasPermissionToRecord() async -> Bool {
+//        await withCheckedContinuation { continuation in
+//            requestRecordPermission { authorized in
+//                continuation.resume(returning: authorized)
+//            }
+//        }
+//    }
+//}

@@ -1,13 +1,25 @@
-// Created by Florian Schweizer on 09.11.22
-
 import SwiftUI
 
 @main
 struct DallETutorialApp: App {
-    @State private var drawable = Drawable(prompt: "", theme: .indigo)
+    @StateObject private var modelData = ModelData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(drawable: $drawable)
+            ContentView()
+                .environmentObject(modelData)
         }
+
+#if !os(watchOS)
+        .commands {
+            LandmarkCommands()
+        }
+#endif
+
+#if os(macOS)
+        Settings {
+            LandmarkSettings()
+        }
+#endif
     }
 }
