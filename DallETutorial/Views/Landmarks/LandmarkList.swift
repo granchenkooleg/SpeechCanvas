@@ -72,9 +72,9 @@ struct LandmarkList: View {
                 }
             }
 
-//            Canvass()
-
-            Text("Select a Landmark")
+            #if os(macOS)
+            MacPanel()
+            #endif
         }
 //        .focusedValue(\.selectedLandmark, $modelData.landmarks[index ?? 0])
     }
