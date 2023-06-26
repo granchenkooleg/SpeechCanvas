@@ -16,7 +16,7 @@
 		5C4A9A20291BAF9900D2B2B5 /* ImageGenerationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A9A1F291BAF9900D2B2B5 /* ImageGenerationResponse.swift */; };
 		5C4A9A22291BB10A00D2B2B5 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A9A21291BB10A00D2B2B5 /* Secret.swift */; };
 		9E57FFE72A38F57800C72B32 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57FFE62A38F57800C72B32 /* SpeechRecognizer.swift */; };
-		9E57FFE92A38F74400C72B32 /* MeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57FFE82A38F74400C72B32 /* MeetingView.swift */; };
+		9E57FFE92A38F74400C72B32 /* ListenerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57FFE82A38F74400C72B32 /* ListenerView.swift */; };
 		9E57FFEB2A38F94700C72B32 /* AVPlayer+Ding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57FFEA2A38F94700C72B32 /* AVPlayer+Ding.swift */; };
 		9E5B2E0C2A459D8E002E2DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */; };
 		9E5B2E0E2A459FD5002E2DFB /* LandmarkCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B2E0D2A459FD5002E2DFB /* LandmarkCommands.swift */; };
@@ -62,7 +62,7 @@
 		9EED77FB2A49CA2C00525298 /* TextFieldListenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C7A062A45C63F00A11542 /* TextFieldListenButton.swift */; };
 		9EED77FC2A49CAB000525298 /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB37C2A448299006F184E /* LandmarkDetail.swift */; };
 		9EED78012A49CB3900525298 /* DallETutorialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A9A0D291BAAD700D2B2B5 /* DallETutorialApp.swift */; };
-		9EED78022A49CD3C00525298 /* MeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57FFE82A38F74400C72B32 /* MeetingView.swift */; };
+		9EED78022A49CD3C00525298 /* ListenerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57FFE82A38F74400C72B32 /* ListenerView.swift */; };
 		9EED78042A49CDC800525298 /* LandmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB37D2A448299006F184E /* LandmarkList.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +77,7 @@
 		5C4A9A1F291BAF9900D2B2B5 /* ImageGenerationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationResponse.swift; sourceTree = "<group>"; };
 		5C4A9A21291BB10A00D2B2B5 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		9E57FFE62A38F57800C72B32 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
-		9E57FFE82A38F74400C72B32 /* MeetingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingView.swift; sourceTree = "<group>"; };
+		9E57FFE82A38F74400C72B32 /* ListenerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerView.swift; sourceTree = "<group>"; };
 		9E57FFEA2A38F94700C72B32 /* AVPlayer+Ding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVPlayer+Ding.swift"; sourceTree = "<group>"; };
 		9E5B2E0D2A459FD5002E2DFB /* LandmarkCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCommands.swift; sourceTree = "<group>"; };
 		9E601A352A39D45D003AD631 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 				9EADB3862A448358006F184E /* Helpers */,
 				9EADB37A2A448272006F184E /* Landmarks */,
 				9E601A372A39D622003AD631 /* HistoryView.swift */,
-				9E57FFE82A38F74400C72B32 /* MeetingView.swift */,
+				9E57FFE82A38F74400C72B32 /* ListenerView.swift */,
 				5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */,
 			);
 			path = Views;
@@ -380,7 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E57FFE92A38F74400C72B32 /* MeetingView.swift in Sources */,
+				9E57FFE92A38F74400C72B32 /* ListenerView.swift in Sources */,
 				9EADB3882A448385006F184E /* FavoriteButton.swift in Sources */,
 				9E57FFE72A38F57800C72B32 /* SpeechRecognizer.swift in Sources */,
 				5C4A9A1E291BAED000D2B2B5 /* ModerationResponse.swift in Sources */,
@@ -427,7 +427,7 @@
 				9EED77C02A49C52C00525298 /* ModerationResponse.swift in Sources */,
 				9EED77BF2A49C52600525298 /* AVPlayer+Ding.swift in Sources */,
 				9EADB38C2A448969006F184E /* Landmark.swift in Sources */,
-				9EED78022A49CD3C00525298 /* MeetingView.swift in Sources */,
+				9EED78022A49CD3C00525298 /* ListenerView.swift in Sources */,
 				9E5B2E0E2A459FD5002E2DFB /* LandmarkCommands.swift in Sources */,
 				9EADB3962A448ED5006F184E /* History.swift in Sources */,
 				9EADB38B2A44841E006F184E /* FavoriteButton.swift in Sources */,
