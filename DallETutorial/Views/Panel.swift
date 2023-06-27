@@ -52,9 +52,9 @@ struct Panel: View {
                             isLoading = true
                             Task {
                                 do {
-                                    //let response = try await DallEImageGenerator.shared.generateImage(withPrompt: drawable.title, apiKey: Secrets.apiKey)
+                                    let response = try await DallEImageGenerator.shared.generateImage(withPrompt: "black cat", quantity: "1", size: "256x256")
 
-                                    if let url = URL(string: "https://www.gstatic.com/webp/gallery3/2_webp_ll.png") {  //response.data.map(\.url).first {
+                                    if let url = response.data.map(\.url).first {
                                         let (data, _) = try await URLSession.shared.data(from: url)
 
                                         image = UIImage(data: data)
