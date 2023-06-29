@@ -32,7 +32,13 @@ class DallEImageGenerator {
         return result.hasIssues == false
     }
 
-    func generateImage(forEditImage image: String? = nil, withPrompt prompt: String, quantity: String, size: String) async throws -> ImageGenerationResponse {
+    func generateImage(
+        forEditImage image: String? = nil,
+        url: URL,
+        withPrompt prompt: String,
+        quantity: String,
+        size: String
+    ) async throws -> ImageGenerationResponse {
 
         //        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
         //            throw ImageError.inValidPrompt
@@ -60,7 +66,7 @@ class DallEImageGenerator {
                 "key": "image",
                 "src": image,
                 "type": "file"
-              ])
+            ])
         }
 
         let boundary = "Boundary-\(UUID().uuidString)"
@@ -89,7 +95,7 @@ class DallEImageGenerator {
         body += "--\(boundary)--\r\n";
         let postData = body.data(using: .utf8)
 
-        var request = URLRequest(url: URL(string: "http://74.235.97.111/api/generate/")!)
+        var request = URLRequest(url: url)
         request.addValue("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", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 

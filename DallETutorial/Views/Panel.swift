@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Panel: View {
+    @AppStorage("imageURL") private var imageURL: String = ""
     @EnvironmentObject var modelData: ModelData
     @State private var showingProfile = false
     @Environment(\.colorScheme) var colorScheme
@@ -19,7 +20,7 @@ struct Panel: View {
     var body: some View {
         ZStack(alignment: .center) {
             Color(uiColor: colorScheme == .light ? .white : .black)
-            NavigationView {
+//            NavigationView {
                 VStack {
                     Spacer()
                     VStack {
@@ -46,32 +47,66 @@ struct Panel: View {
                     }
                     .frame(width: 256, height: 256)
                     Spacer()
-                    HStack {
-                        ListenerView(drawable: $drawable)
-                        Button {
-                            isLoading = true
-                            Task {
-                                do {
-                                    let response = try await DallEImageGenerator.shared.generateImage(withPrompt: "black cat", quantity: "1", size: "256x256")
+                    VStack {
+                        TextField("Enter prompt", text: $drawable.prompt)
+                        HStack {
+                            Button("Edit") {
+                                isLoading = true
+                                Task {
+                                    do {
+                                        let response = try await DallEImageGenerator.shared.generateImage(
+                                            forEditImage: imageURL,
+                                            url: URL(string: "http://74.235.97.111/api/edit/")!,
+                                            withPrompt: "black cat with white ears",
+                                            quantity: "1",
+                                            size: "256x256"
+                                        )
 
-                                    if let url = response.data.map(\.url).first {
-                                        let (data, _) = try await URLSession.shared.data(from: url)
+                                        if let url = response.data.map(\.url).first {
+                                            let (data, _) = try await URLSession.shared.data(from: url)
 
-                                        image = UIImage(data: data)
-                                        isLoading = false
+                                            image = UIImage(data: data)
+                                            isLoading = false
+                                        }
+                                    } catch {
+                                        print(error)
                                     }
-                                } catch {
-                                    print(error)
                                 }
                             }
-                        } label: {
-                            Image(systemName: "arrow.up")
-                                .frame(width: 1)
-                                .foregroundStyle(.white)
-                                .padding()
-                                .background(.blue)
-                                .clipShape(Circle())
+                            .frame(width: 50, height: 50)
+                            .background(.gray)
+                            .foregroundColor(.black)
+                            .cornerRadius(12)
+                            Button("Generate") {
+                                isLoading = true
+                                Task {
+                                    do {
+                                        let response = try await DallEImageGenerator.shared.generateImage(
+                                            url: URL(string: "http://74.235.97.111/api/generate/")!,
+                                            withPrompt: "black cat",
+                                            quantity: "1",
+                                            size: "256x256"
+                                        )
 
+                                        if let url = response.data.map(\.url).first {
+                                            imageURL = url.absoluteString
+                                            let (data, _) = try await URLSession.shared.data(from: url)
+
+                                            image = UIImage(data: data)
+                                            isLoading = false
+                                        }
+                                    } catch {
+                                        print(error)
+                                    }
+                                }
+                            }
+                            .frame(width: 190, height: 50)
+                            .background(CustomColor.mint)
+                            .foregroundColor(.black)
+                            .controlSize(.large)
+                            .cornerRadius(12)
+
+                            ListenerView(drawable: $drawable)
                         }
                     }
                 }
@@ -88,7 +123,7 @@ struct Panel: View {
                     ProfileHost()
                         .environmentObject(modelData)
                 }
-            }
+//            }
         }
 //        .ignoresSafeArea(edges: .top)
     }

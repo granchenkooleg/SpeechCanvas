@@ -40,11 +40,12 @@ struct LandmarkList: View {
     }
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             List(selection: $selectedLandmark) {
                 ForEach(filteredLandmarks) { landmark in
                     NavigationLink {
-                        LandmarkDetail(landmark: landmark)
+                        Panel()
+//                        LandmarkDetail(landmark: landmark)
                     } label: {
                         LandmarkRow(landmark: landmark)
                     }
@@ -71,8 +72,8 @@ struct LandmarkList: View {
                     }
                 }
             }
-        }
-        .focusedValue(\.selectedLandmark, $modelData.landmarks[index ?? 0])
+//        }
+//        .focusedValue(\.selectedLandmark, $modelData.landmarks[index ?? 0])
     }
 }
 

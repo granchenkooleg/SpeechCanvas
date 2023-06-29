@@ -10,18 +10,25 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: $selection) {
-            Panel()
-                .tabItem {
-                    Label("Canvas", systemImage: "sprinkler.and.droplets.fill")
-                }
-                .tag(Tab.canvas)
+        NavigationView {
+            if UIDevice.isIPad {
+                LandmarkList()
+                Panel()
+            } else {
+                TabView(selection: $selection) {
+                    Panel()
+                        .tabItem {
+                            Label("Canvas", systemImage: "sprinkler.and.droplets.fill")
+                        }
+                        .tag(Tab.canvas)
 
-            LandmarkList()
-                .tabItem {
-                    Label("List", systemImage: "list.bullet")
+                    LandmarkList()
+                        .tabItem {
+                            Label("List", systemImage: "list.bullet")
+                        }
+                        .tag(Tab.list)
                 }
-                .tag(Tab.list)
+            }
         }
     }
 }

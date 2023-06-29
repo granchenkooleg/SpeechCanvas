@@ -9,7 +9,6 @@ struct ListenerView: View {
     private var player: AVPlayer { AVPlayer.sharedDingPlayer }
     
     var body: some View {
-        TextField("Enter prompt", text: $drawable.prompt)
         Button(action: {
             if !isRecording {
                 startListen()
@@ -17,11 +16,14 @@ struct ListenerView: View {
                 endListen()
             }
         }) {
-            Image(systemName: isRecording ? "stop.fill" : "waveform")
-                .foregroundColor(.secondary)
+            Image(systemName: isRecording ? "mic.square.fill" : "mic.circle.fill")
+                .resizable()
+                .foregroundColor(.primary)
+                .scaledToFit()
+                .frame(width: 50, height: 50)
         }
-//            .modifier(TextFieldListenButton(text: isRecording))
-                    .textFieldStyle(.roundedBorder)
+
+        //        .textFieldStyle(.roundedBorder)
     }
     
     private func startListen() {
@@ -41,43 +43,6 @@ struct ListenerView: View {
 
 //struct MeetingView_Previews: PreviewProvider {
 //    static var previews: some View {
-////        MeetingView(scrum: .constant(DailyScrum.sampleData[0]))
-//    }
-//}
-
-//struct TextFieldListenButton: ViewModifier {
-//    @Binding var isRecording: String
-//
-//    func body(content: Content) -> some View {
-//        HStack {
-//            content
-//
-////            if !text.isEmpty {
-//                Button(action: {
-//                    if !isRecording {
-//                        startListen()
-//                    } else {
-//                        endListen()
-//                    }
-//                }) {
-//                    Image(systemName: "waveform")
-//                                                .foregroundColor(Color(UIColor.opaqueSeparator))
-////                    Label("Speak", systemImage: "mic.circle.fill")
-////                        .font(.title)
-//                    //                    Text(isRecording ? "Stop" : "Record")
-////                        .foregroundColor(.white)
-//
-//                }
-////                .buttonStyle(.borderedProminent)
-//
-////                Button(
-////                    action: { self.text = "" },
-////                    label: {
-////                        Image(systemName: "delete.left")
-////                            .foregroundColor(Color(UIColor.opaqueSeparator))
-////                    }
-////                )
-////            }
-//        }
+//        ListenerView(drawable: <#T##Drawable#>, speechRecognizer: <#T##arg#>, isRecording: <#T##arg#>)
 //    }
 //}
