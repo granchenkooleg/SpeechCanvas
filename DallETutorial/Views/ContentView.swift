@@ -3,12 +3,12 @@ import SwiftUI
 struct ContentView: View {
     @State private var drawable = Drawable(prompt: "", theme: .indigo)
     @State private var selection: Tab = .canvas
-
+    
     enum Tab {
         case canvas
         case list
     }
-
+    
     var body: some View {
         NavigationView {
             if UIDevice.isIPad {
@@ -21,7 +21,7 @@ struct ContentView: View {
                             Label("Canvas", systemImage: "sprinkler.and.droplets.fill")
                         }
                         .tag(Tab.canvas)
-
+                    
                     LandmarkList()
                         .tabItem {
                             Label("List", systemImage: "list.bullet")
@@ -30,6 +30,11 @@ struct ContentView: View {
                 }
             }
         }
+        .background(Color.clear)
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

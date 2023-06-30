@@ -20,9 +20,9 @@ struct Landmark: Hashable, Codable, Identifiable {
 
     var category: Category
     enum Category: String, CaseIterable, Codable {
-        case lakes = "Lakes"
-        case rivers = "Rivers"
-        case mountains = "Mountains"
+        case recent = "Recent"
+        case edited = "Edited"
+        case large = "Large"
     }
 
     private var imageName: String

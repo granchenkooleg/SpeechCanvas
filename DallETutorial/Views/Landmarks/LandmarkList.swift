@@ -16,9 +16,9 @@ struct LandmarkList: View {
 
     enum FilterCategory: String, CaseIterable, Identifiable {
         case all = "All"
-        case lakes = "Lakes"
-        case rivers = "Rivers"
-        case mountains = "Mountains"
+        case recent = "Recent"
+        case edited = "Edited"
+        case large = "Large"
 
         var id: FilterCategory { self }
     }
@@ -40,7 +40,6 @@ struct LandmarkList: View {
     }
 
     var body: some View {
-//        NavigationView {
             List(selection: $selectedLandmark) {
                 ForEach(filteredLandmarks) { landmark in
                     NavigationLink {
@@ -72,7 +71,6 @@ struct LandmarkList: View {
                     }
                 }
             }
-//        }
 //        .focusedValue(\.selectedLandmark, $modelData.landmarks[index ?? 0])
     }
 }
