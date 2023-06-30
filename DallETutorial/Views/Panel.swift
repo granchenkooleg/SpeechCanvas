@@ -14,7 +14,7 @@ struct Panel: View {
     @Environment(\.colorScheme) var colorScheme
     @State var drawable: Drawable = Drawable(prompt: "", theme: .bubblegum)
     //    @State private var prompt: String = ""
-    @State private var image: UIImage? = nil
+    @State private var image: UIImage?
     @State private var images: [UIImage] = []
     @State private var isLoading: Bool = false
 
@@ -41,72 +41,13 @@ struct Panel: View {
                 }
 
                 Spacer()
-                VStack {
-                    TextField("Enter prompt", text: $drawable.prompt)
-                    HStack {
-                        Button("Edit") {
-                            isLoading = true
-                            Task {
-                                do {
-                                    let response = try await DallEImageGenerator.shared.generateImage(
-                                        forEditImage: imageData,
-                                        url: URL(string: "http://74.235.97.111/api/edit/")!,
-                                        withPrompt: drawable.prompt,
-                                        quantity: "1",
-                                        size: "256x256"
-                                    )
-
-                                    if let url = response.data.map(\.url).first {
-                                        let (data, _) = try await URLSession.shared.data(from: url)
-
-                                        image = UIImage(data: data)
-                                        isLoading = false
-                                        drawable.prompt = ""
-                                    }
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                        }
-                        .frame(width: 50, height: 50)
-                        .background(.gray)
-                        .foregroundColor(.black)
-                        .cornerRadius(12)
-
-                        Button("Generate") {
-                            isLoading = true
-                            Task {
-                                do {
-                                    let response = try await DallEImageGenerator.shared.generateImage(
-                                        url: URL(string: "http://74.235.97.111/api/generate/")!,
-                                        withPrompt: drawable.prompt,
-                                        quantity: "4",
-                                        size: "256x256"
-                                    )
-
-                                    for data in response.data {
-                                        let (data, _) = try await URLSession.shared.data(from: data.url)
-                                        //                                                                                            imageData = data
-
-                                        images.append(UIImage(data: data)!)
-
-                                        isLoading = false
-                                        drawable.prompt = ""
-                                    }
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                        }
-                        .frame(width: 190, height: 50)
-                        .background(CustomColor.mint)
-                        .foregroundColor(.black)
-                        .controlSize(.large)
-                        .cornerRadius(12)
-
-                        ListenerView(drawable: $drawable)
-                    }
-                }
+                BottomView(
+                    drawable: $drawable,
+                    isLoading: $isLoading,
+                    imageData: imageData,
+                    image: $image,
+                    images: $images
+                )
             }
             .padding()
             .navigationTitle("Canvas")
@@ -123,6 +64,83 @@ struct Panel: View {
             }
         }
         .ignoresSafeArea(edges: .top)
+    }
+}
+
+struct BottomView: View {
+    @Binding var drawable: Drawable
+    @Binding var isLoading: Bool
+    var imageData: Data?
+    @Binding var image: UIImage?
+    @Binding var images: [UIImage]
+
+    var body: some View {
+        VStack {
+            TextField("Enter prompt", text: $drawable.prompt)
+            HStack {
+                Button("Edit") {
+                    isLoading = true
+                    Task {
+                        do {
+                            let response = try await DallEImageGenerator.shared.generateImage(
+                                forEditImage: imageData,
+                                url: URL(string: "http://74.235.97.111/api/edit/")!,
+                                withPrompt: drawable.prompt,
+                                quantity: "1",
+                                size: "256x256"
+                            )
+
+                            if let url = response.data.map(\.url).first {
+                                let (data, _) = try await URLSession.shared.data(from: url)
+
+                                image = UIImage(data: data)
+                                isLoading = false
+                                drawable.prompt = ""
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+                .frame(width: 50, height: 50)
+                .background(.gray)
+                .foregroundColor(.black)
+                .cornerRadius(12)
+
+                Button("Generate") {
+                    isLoading = true
+                    Task {
+                        do {
+                            let response = try await DallEImageGenerator.shared.generateImage(
+                                url: URL(string: "http://74.235.97.111/api/generate/")!,
+                                withPrompt: drawable.prompt,
+                                quantity: "4",
+                                size: "256x256"
+                            )
+
+                            for data in response.data {
+                                let (data, _) = try await URLSession.shared.data(from: data.url)
+                                //                                                                                            imageData = data
+
+                                images.append(UIImage(data: data)!)
+
+                                isLoading = false
+                                drawable.prompt = ""
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+                .frame(width: 190, height: 50)
+                .background(CustomColor.mint)
+                .foregroundColor(.black)
+                .controlSize(.large)
+                .cornerRadius(12)
+
+                ListenerView(drawable: $drawable)
+            }
+        }
     }
 }
 
