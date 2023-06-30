@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Panel: View {
-    @AppStorage("imageURL") private var imageURL: String = ""
+    @AppStorage("imageURL") private var imageData: Data?
     @EnvironmentObject var modelData: ModelData
     @State private var showingProfile = false
     @Environment(\.colorScheme) var colorScheme
@@ -24,7 +24,7 @@ struct Panel: View {
                 VStack {
                     Spacer()
                     VStack {
-                        if let image {
+                        if let image, !isLoading {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFit()
@@ -55,9 +55,9 @@ struct Panel: View {
                                 Task {
                                     do {
                                         let response = try await DallEImageGenerator.shared.generateImage(
-                                            forEditImage: imageURL,
+                                            forEditImage: imageData,
                                             url: URL(string: "http://74.235.97.111/api/edit/")!,
-                                            withPrompt: "black cat with white ears",
+                                            withPrompt: drawable.prompt,
                                             quantity: "1",
                                             size: "256x256"
                                         )
@@ -77,20 +77,21 @@ struct Panel: View {
                             .background(.gray)
                             .foregroundColor(.black)
                             .cornerRadius(12)
+
                             Button("Generate") {
                                 isLoading = true
                                 Task {
                                     do {
                                         let response = try await DallEImageGenerator.shared.generateImage(
                                             url: URL(string: "http://74.235.97.111/api/generate/")!,
-                                            withPrompt: "black cat",
+                                            withPrompt: drawable.prompt,
                                             quantity: "1",
                                             size: "256x256"
                                         )
 
                                         if let url = response.data.map(\.url).first {
-                                            imageURL = url.absoluteString
                                             let (data, _) = try await URLSession.shared.data(from: url)
+                                            imageData = data
 
                                             image = UIImage(data: data)
                                             isLoading = false

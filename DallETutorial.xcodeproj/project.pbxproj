@@ -156,12 +156,12 @@
 		5C4A9A0C291BAAD700D2B2B5 /* DallETutorial */ = {
 			isa = PBXGroup;
 			children = (
-				9EED78192A4DD0D600525298 /* Extensions */,
 				9EED780E2A4A1B5C00525298 /* Info.plist */,
 				5C4A9A0D291BAAD700D2B2B5 /* DallETutorialApp.swift */,
 				9E9768C52A3738F70005D51E /* Models */,
 				9E9768C62A37397A0005D51E /* Views */,
 				5C4A9A21291BB10A00D2B2B5 /* Secret.swift */,
+				9EED78192A4DD0D600525298 /* Extensions */,
 				9E9768C72A3746940005D51E /* NetworkLayer */,
 				9EADB38D2A44899A006F184E /* Resources */,
 				5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */,

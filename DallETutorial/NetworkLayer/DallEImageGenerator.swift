@@ -33,7 +33,7 @@ class DallEImageGenerator {
     }
 
     func generateImage(
-        forEditImage image: String? = nil,
+        forEditImage imageData: Data? = nil,
         url: URL,
         withPrompt prompt: String,
         quantity: String,
@@ -44,7 +44,7 @@ class DallEImageGenerator {
         //            throw ImageError.inValidPrompt
         //        }
 
-        var parameters = [
+        let parameters = [
             [
                 "key": "prompt",
                 "value": prompt,
@@ -61,46 +61,41 @@ class DallEImageGenerator {
                 "type": "text"
             ]] as [[String: Any]]
 
-        if let image = image {
-            parameters.append([
-                "key": "image",
-                "src": image,
-                "type": "file"
-            ])
-        }
-
         let boundary = "Boundary-\(UUID().uuidString)"
-        var body = ""
+        let body = NSMutableData()
 
         for param in parameters {
             if param["disabled"] != nil { continue }
             let paramName = param["key"]!
-            body += "--\(boundary)\r\n"
-            body += "Content-Disposition:form-data; name=\"\(paramName)\""
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition:form-data; name=\"\(paramName)\"".data(using: .utf8)!)
             if param["contentType"] != nil {
-                body += "\r\nContent-Type: \(param["contentType"] as! String)"
+                body.append("\r\nContent-Type: \(param["contentType"] as! String)".data(using: .utf8)!)
             }
             let paramType = param["type"] as! String
             if paramType == "text" {
                 let paramValue = param["value"] as! String
-                body += "\r\n\r\n\(paramValue)\r\n"
+                body.append("\r\n\r\n\(paramValue)\r\n".data(using: .utf8)!)
             } else {
-                let paramSrc = param["src"] as! String
-                let fileData = try NSData(contentsOfFile: paramSrc, options: []) as Data
-                let fileContent = String(data: fileData, encoding: .utf8)!
-                body += "; filename=\"\(paramSrc)\"\r\n"
-                + "Content-Type: \"content-type header\"\r\n\r\n\(fileContent)\r\n"
+                // Add image data to the request body
+                if let data = imageData {
+                    body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                    body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                    body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                    body.append(data)
+                    body.append("\r\n".data(using: .utf8)!)
+                    body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+                }
             }
         }
-        body += "--\(boundary)--\r\n";
-        let postData = body.data(using: .utf8)
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
         var request = URLRequest(url: url)
         request.addValue("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", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"
-        request.httpBody = postData
+        request.httpBody = body as Data
 
         let (response, _) = try await URLSession.shared.data(for: request)
         let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: response)
