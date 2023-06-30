@@ -19,8 +19,12 @@ struct Panel: View {
     @State private var isLoading: Bool = false
 
     var body: some View {
-        ZStack(alignment: .center) {
+        ZStack(alignment: .trailing) {
             Color(uiColor: colorScheme == .light ? .white : .black)
+
+            SideBarButtons()
+                .offset(y: -100)
+
             VStack {
                 Spacer()
                 VStack {
@@ -64,6 +68,48 @@ struct Panel: View {
             }
         }
         .ignoresSafeArea(edges: .top)
+    }
+}
+
+struct SideBarButtons: View {
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        VStack(spacing: 6) {
+            Button("4") {
+
+            }
+            .frame(width: 44, height: 44)
+            .background(colorScheme == .light ? .black : .white)
+            .foregroundColor(colorScheme == .dark ? .black : .white)
+            .cornerRadius(8)
+
+            Button("🟠") {
+
+            }
+            .frame(width: 44, height: 44)
+            .background(colorScheme == .light ? .black : .white)
+            .foregroundColor(colorScheme == .dark ? .black : .white)
+            .cornerRadius(8)
+
+            Button("256x256") {
+
+            }
+            .font(Font.system(size: UIFontMetrics.default.scaledValue(for: 8)))
+            .frame(width: 44, height: 44)
+            .background(colorScheme == .light ? .black : .white)
+            .foregroundColor(colorScheme == .dark ? .black : .white)
+            .cornerRadius(8)
+            .lineLimit(1)
+
+            Button("⌘") {
+
+            }
+            .frame(width: 44, height: 44)
+            .background(colorScheme == .light ? .black : .white)
+            .foregroundColor(colorScheme == .dark ? .black : .white)
+            .cornerRadius(8)
+        }
+        .padding(.trailing, 16)
     }
 }
 
