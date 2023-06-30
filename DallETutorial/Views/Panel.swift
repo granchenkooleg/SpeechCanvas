@@ -68,6 +68,7 @@ struct Panel: View {
 }
 
 struct BottomView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Binding var drawable: Drawable
     @Binding var isLoading: Bool
     var imageData: Data?
@@ -76,7 +77,16 @@ struct BottomView: View {
 
     var body: some View {
         VStack {
-            TextField("Enter prompt", text: $drawable.prompt)
+            TextField("Enter prompt", text: $drawable.prompt, axis: .vertical)
+                .lineLimit(5)
+                .disableAutocorrection(true)
+                .frame(height: 77)
+                .textFieldStyle(PlainTextFieldStyle())
+                .padding([.horizontal], 16)
+                .background(colorScheme == .light ? .black : .white)
+                .foregroundColor(colorScheme == .dark ? .black : .white)
+                .cornerRadius(16)
+                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
             HStack {
                 Button("Edit") {
                     isLoading = true
@@ -103,8 +113,8 @@ struct BottomView: View {
                     }
                 }
                 .frame(width: 50, height: 50)
-                .background(.gray)
-                .foregroundColor(.black)
+                .background(colorScheme == .light ? .black : .white)
+                .foregroundColor(colorScheme == .dark ? .black : .white)
                 .cornerRadius(12)
 
                 Button("Generate") {
