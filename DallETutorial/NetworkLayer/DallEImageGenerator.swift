@@ -10,7 +10,10 @@ class DallEImageGenerator {
     
     private init() { }
     
-    func makeSurePromptIsValid(_ prompt: String, apiKey: String) async throws -> Bool {
+    func makeSurePromptIsValid(
+        _ prompt: String,
+        apiKey: String
+    ) async throws -> Bool {
         guard let url = URL(string: "https://api.openai.com/v1/moderations") else {
             throw ImageError.badURL
         }
@@ -76,18 +79,29 @@ class DallEImageGenerator {
             if paramType == "text" {
                 let paramValue = param["value"] as! String
                 body.append("\r\n\r\n\(paramValue)\r\n".data(using: .utf8)!)
-            } else {
-                // Add image data to the request body
-                if let data = imageData {
-                    body.append("--\(boundary)\r\n".data(using: .utf8)!)
-                    body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
-                    body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-                    body.append(data)
-                    body.append("\r\n".data(using: .utf8)!)
-                    body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-                }
             }
+//            else {
+//                // Add image data to the request body
+//                if let data = imageData {
+//                    body.append("--\(boundary)\r\n".data(using: .utf8)!)
+//                    body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+//                    body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+//                    body.append(data)
+//                    body.append("\r\n".data(using: .utf8)!)
+//                    body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+//                }
+//            }
         }
+        
+        if let data = imageData {
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+            body.append(data)
+            body.append("\r\n".data(using: .utf8)!)
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        }
+
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
         var request = URLRequest(url: url)

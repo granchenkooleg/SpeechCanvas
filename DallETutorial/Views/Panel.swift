@@ -13,14 +13,15 @@ struct Panel: View {
     @State private var showingProfile = false
     @Environment(\.colorScheme) var colorScheme
     @State var drawable: Drawable = Drawable(prompt: "", theme: .bubblegum)
-    //    @State private var prompt: String = ""
+    @State private var size: String = "256x256"
+    @State private var quantity: String = "1"
     @State private var image: UIImage?
     @State private var images: [UIImage] = []
     @State private var isLoading: Bool = false
 
     var body: some View {
         ZStack(alignment: .trailing) {
-            Color(uiColor: colorScheme == .light ? .white : .black)
+//            Color(uiColor: colorScheme == .light ? .white : .black)
 
             SideBarButtons()
                 .offset(y: -100)
@@ -46,9 +47,11 @@ struct Panel: View {
 
                 Spacer()
                 BottomView(
+                    size: $size,
+                    quantity: $quantity,
                     drawable: $drawable,
                     isLoading: $isLoading,
-                    imageData: imageData,
+                    imageData: $imageData,
                     image: $image,
                     images: $images
                 )
@@ -72,58 +75,93 @@ struct Panel: View {
 }
 
 struct SideBarButtons: View {
+    @State private var quantitySelection = "2"
+    let quantity = [
+        "1","2","3","4","5","6","7","8","9","10"
+    ]
+
+    @State private var selection = "Pixar"
+    @State private var styles = [
+        "Pixar": "figure.american.football",
+        "Surrealism": "figure.archery",
+        "Pointillism": "figure.australian.football",
+        "Pop Art": "figure.badminton",
+        "Abstract Expressionism": "figure.barre",
+        "Fauvism": "figure.baseball",
+        "Realism": "figure.basketball",
+        "Romanticism": "figure.bowling",
+        "Symbolism": "figure.boxing"]
+    //        "Minimalism",
+    //        "Post-Impressionism",
+    //        "Art Nouveau",
+    //        "Expressionism",
+    //        "Constructivism",
+    //        "Dadaism",
+    //        "Renaissance",
+    //        "Baroque",
+    //        "Rococo",
+    //        "Neoclassicism",
+    //        "Abstract Art",
+    //        "Op Art",
+    //        "Photorealism",
+    //        "Street Art",
+    //        "Conceptual Art"]
+
+    @State private var sizeSelection = "2"
+    let sizes = [
+        "256x256","512x512","1024x1024"
+    ]
+    //    @State private var selection1: String = "4"
+    //    @State private var selection: String = "Pixar"
     @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
-        VStack(spacing: 6) {
-            Button("4") {
-
+        VStack(alignment: .trailing) {
+            Picker("", selection: $quantitySelection) {
+                ForEach(quantity, id: \.self) {
+                    Text($0)
+                }
             }
-            .frame(width: 44, height: 44)
-            .background(colorScheme == .light ? .black : .white)
-            .foregroundColor(colorScheme == .dark ? .black : .white)
-            .cornerRadius(8)
 
-            Button("🟠") {
+            Picker("", selection: $selection) {
+                ForEach(styles.sorted(by: >), id: \.key) { style in
+                    HStack {
+                        Image(systemName: style.value)
+                        Text(style.key)
 
+
+                    }
+                }
             }
-            .frame(width: 44, height: 44)
-            .background(colorScheme == .light ? .black : .white)
-            .foregroundColor(colorScheme == .dark ? .black : .white)
-            .cornerRadius(8)
 
-            Button("256x256") {
-
+            Picker("", selection: $sizeSelection) {
+                ForEach(sizes, id: \.self) {
+                    Text($0)
+                }
             }
-            .font(Font.system(size: UIFontMetrics.default.scaledValue(for: 8)))
-            .frame(width: 44, height: 44)
-            .background(colorScheme == .light ? .black : .white)
-            .foregroundColor(colorScheme == .dark ? .black : .white)
-            .cornerRadius(8)
-            .lineLimit(1)
-
-            Button("⌘") {
-
-            }
-            .frame(width: 44, height: 44)
-            .background(colorScheme == .light ? .black : .white)
-            .foregroundColor(colorScheme == .dark ? .black : .white)
-            .cornerRadius(8)
         }
-        .padding(.trailing, 16)
+        .accentColor(colorScheme == .dark ? .white : .black)
+        .pickerStyle(.menu)
+//        .padding(.trailing, 16)
     }
 }
 
 struct BottomView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Binding var size: String
+    @Binding var quantity: String
     @Binding var drawable: Drawable
     @Binding var isLoading: Bool
-    var imageData: Data?
+    @Binding var imageData: Data?
     @Binding var image: UIImage?
     @Binding var images: [UIImage]
 
     var body: some View {
         VStack {
             TextField("Enter prompt", text: $drawable.prompt, axis: .vertical)
+                .placeholder(when: drawable.prompt.isEmpty) {
+                    Text("Enter prompt").foregroundColor(.gray)
+                }
                 .lineLimit(5)
                 .disableAutocorrection(true)
                 .frame(height: 77)
@@ -135,6 +173,7 @@ struct BottomView: View {
                 .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
             HStack {
                 Button("Edit") {
+                    images.removeAll()
                     isLoading = true
                     Task {
                         do {
@@ -143,13 +182,13 @@ struct BottomView: View {
                                 url: URL(string: "http://74.235.97.111/api/edit/")!,
                                 withPrompt: drawable.prompt,
                                 quantity: "1",
-                                size: "256x256"
+                                size: size
                             )
 
                             if let url = response.data.map(\.url).first {
                                 let (data, _) = try await URLSession.shared.data(from: url)
 
-                                image = UIImage(data: data)
+                                images.append(UIImage(data: data)!)
                                 isLoading = false
                                 drawable.prompt = ""
                             }
@@ -164,19 +203,20 @@ struct BottomView: View {
                 .cornerRadius(12)
 
                 Button("Generate") {
+                    images.removeAll()
                     isLoading = true
                     Task {
                         do {
                             let response = try await DallEImageGenerator.shared.generateImage(
                                 url: URL(string: "http://74.235.97.111/api/generate/")!,
                                 withPrompt: drawable.prompt,
-                                quantity: "4",
-                                size: "256x256"
+                                quantity: quantity,
+                                size: size
                             )
 
                             for data in response.data {
                                 let (data, _) = try await URLSession.shared.data(from: data.url)
-                                //                                                                                            imageData = data
+                                imageData = data
 
                                 images.append(UIImage(data: data)!)
 
@@ -204,19 +244,26 @@ struct CanvasContent: View {
     var images: [UIImage]
     var body: some View {
         if UIDevice.isIPad {
-            ScrollView(.horizontal) {
-                LazyHStack(spacing: 5) {
-                    sequenceOfImages()
+            GeometryReader { geometry in
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 5) {
+                        sequenceOfImages()
+                    }
+                    .frame(width: geometry.size.width)
+                    .frame(minHeight: geometry.size.height)
                 }
             }
         } else {
-            ScrollView(.vertical) {
-                LazyVStack(spacing: 5) {
-                    sequenceOfImages()
+            GeometryReader { geometry in
+                ScrollView(.vertical) {
+                    LazyVStack(spacing: 5) {
+                        sequenceOfImages()
+                    }
+                    .frame(width: geometry.size.width)
+                    .frame(minHeight: geometry.size.height)
                 }
             }
         }
-
     }
 
     func sequenceOfImages() -> some View {
@@ -233,3 +280,17 @@ struct CanvasContent: View {
         }
     }
 }
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+            ZStack(alignment: alignment) {
+                placeholder().opacity(shouldShow ? 1 : 0)
+                self
+            }
+        }
+}
+
