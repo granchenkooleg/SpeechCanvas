@@ -18,13 +18,17 @@ struct Panel: View {
     @State private var image: UIImage?
     @State private var images: [UIImage] = []
     @State private var isLoading: Bool = false
-
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
                 //                    if !images.isEmpty, !isLoading {
-                CanvasContent(images: images)
-
+                CanvasContent(
+                    drawable: drawable,
+                    isSideBar: false,
+                    images: images
+                )
+                
                 //                    } else {
                 //                        Rectangle()
                 //                            .fill(.clear)
@@ -37,7 +41,7 @@ struct Panel: View {
                 //                                }
                 //                            }
                 //                    }
-
+                
                 Spacer()
                 BottomView(
                     size: $size,
@@ -62,7 +66,7 @@ struct Panel: View {
                     .environmentObject(modelData)
             }
             //            .ignoresSafeArea(edges: .top)
-
+            
             SideBarButtons()
                 .offset(y: -170)
         }
@@ -74,7 +78,7 @@ struct SideBarButtons: View {
     let quantity = [
         "1","2","3","4","5","6","7","8","9","10"
     ]
-
+    
     @State private var selection = "Pixar"
     @State private var styles = [
         "Pixar": "figure.american.football",
@@ -101,7 +105,7 @@ struct SideBarButtons: View {
     //        "Photorealism",
     //        "Street Art",
     //        "Conceptual Art"]
-
+    
     @State private var sizeSelection = "2"
     let sizes = [
         "256x256","512x512","1024x1024"
@@ -109,44 +113,39 @@ struct SideBarButtons: View {
     //    @State private var selection1: String = "4"
     //    @State private var selection: String = "Pixar"
     @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
         VStack(alignment: .trailing) {
-
+            
             Picker("", selection: $quantitySelection) {
                 ForEach(quantity, id: \.self) {
                     Text($0)
                 }
             }
-//            .frame(width: 44, height: 44)
-//            .blur(radius: 20)
-            .background (.ultraThinMaterial, in:
-            RoundedRectangle (cornerRadius: 16.0))
-
+            .background (.ultraThinMaterial, in: RoundedRectangle (cornerRadius: 16.0))
+            
             Picker("", selection: $selection) {
                 ForEach(styles.sorted(by: >), id: \.key) { style in
                     HStack {
                         Image(systemName: style.value)
                         Text(style.key)
-
-
+                        
+                        
                     }
                 }
             }
-            .background (.ultraThinMaterial, in:
-            RoundedRectangle (cornerRadius: 16.0))
-
+            .background (.ultraThinMaterial, in: RoundedRectangle (cornerRadius: 16.0))
+            
             Picker("", selection: $sizeSelection) {
                 ForEach(sizes, id: \.self) {
                     Text($0)
                 }
             }
-            .background (.ultraThinMaterial, in:
-            RoundedRectangle (cornerRadius: 16.0))
+            .background (.ultraThinMaterial, in: RoundedRectangle (cornerRadius: 16.0))
         }
         .accentColor(colorScheme == .dark ? .white : .black)
         .pickerStyle(.menu)
-        //        .padding(.trailing, 16)
+        .padding(.horizontal, 8)
     }
 }
 
@@ -159,7 +158,7 @@ struct BottomView: View {
     @Binding var imageData: Data?
     @Binding var image: UIImage?
     @Binding var images: [UIImage]
-
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
@@ -188,13 +187,13 @@ struct BottomView: View {
                                     quantity: quantity,
                                     size: size
                                 )
-
+                                
                                 for data in response.data {
                                     let (data, _) = try await URLSession.shared.data(from: data.url)
                                     imageData = data
-
+                                    
                                     images.append(UIImage(data: data)!)
-
+                                    
                                     isLoading = false
                                     drawable.prompt = ""
                                 }
@@ -208,7 +207,7 @@ struct BottomView: View {
                     .foregroundColor(.black)
                     .controlSize(.large)
                     .cornerRadius(12)
-
+                    
                     ListenerView(drawable: $drawable)
                 }
             }
@@ -216,11 +215,13 @@ struct BottomView: View {
             .padding(.horizontal, (geometry.size.width - geometry.size.width * 0.85) / 2)
         }
         .frame(height: 135)
-
+        
     }
 }
 
 struct CanvasContent: View {
+    @State var drawable: Drawable?
+    var isSideBar: Bool = true
     var symbols = [
         "keyboard",
         "hifispeaker.fill",
@@ -233,39 +234,58 @@ struct CanvasContent: View {
         "plus.bubble",
         "video"
     ]
-
-    var gridItemLayout = [GridItem(.adaptive(minimum: 256))]
+    
+    var gridItemLayout = [GridItem(.adaptive(minimum: 256), alignment: .center)]
+    var gridItemLayoutSideBar = [GridItem(.adaptive(minimum: 50), spacing: 0, alignment: .center)]
     //    var threeColumnGrid: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     var images: [UIImage]
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: gridItemLayout, spacing: 5) {
-                sequenceOfImages()
+        if isSideBar {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(drawable?.prompt ?? "Prompt, prompt, prompt")
+                    LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
+                        sequenceOfImages()
+                    }
+                }
             }
-            //            .padding(200)
+        } else {
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVGrid(columns: gridItemLayout) {
+                    sequenceOfImages()
+                }
+            }
+            .padding(.horizontal, 16)
         }
+        
     }
-
+    
     func sequenceOfImages() -> some View {
         ForEach(symbols, id: \.self) { symbol in
             //        ForEach(images, id: \.self) { image in
-            VStack {
+            if isSideBar {
                 Image(systemName: symbol)
                     .resizable()
                     .scaledToFit()
-                //                    .frame(height: 150)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                    .background(.brown)
+                    .border(.black)
+                //                        .padding()
+            } else {
+                Image(systemName: symbol)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 256, height: 256)
                     .cornerRadius(8)
-
-
-                //                Image(uiImage: image)
-                //                    .resizable()
-                //                    .scaledToFit()
-                //                Button("Save Image") {
-                //                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                //                }
             }
-            .padding()
-            //            .frame(width: 256, height: 256)
+            
+            
+            //                Image(uiImage: image)
+            //                    .resizable()
+            //                    .scaledToFit()
+            //                                Button("Save Image") {
+            //                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            //                                }
         }
     }
 }
@@ -275,7 +295,7 @@ extension View {
         when shouldShow: Bool,
         alignment: Alignment = .leading,
         @ViewBuilder placeholder: () -> Content) -> some View {
-
+            
             ZStack(alignment: alignment) {
                 placeholder().opacity(shouldShow ? 1 : 0)
                 self
