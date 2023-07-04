@@ -22,23 +22,21 @@ struct Panel: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             VStack {
-//                    if !images.isEmpty, !isLoading {
-                    CanvasContent(images: images)
-//                    } else {
-//                        Rectangle()
-//                            .fill(.clear)
-//                            .overlay {
-//                                if isLoading {
-//                                    VStack {
-//                                        ProgressView()
-//                                        Text("Loading...")
-//                                    }
-//                                }
-//                            }
-//                    }
+                //                    if !images.isEmpty, !isLoading {
+                CanvasContent(images: images)
 
-//                SideBarButtons()
-//                    .offset(y: -100)
+                //                    } else {
+                //                        Rectangle()
+                //                            .fill(.clear)
+                //                            .overlay {
+                //                                if isLoading {
+                //                                    VStack {
+                //                                        ProgressView()
+                //                                        Text("Loading...")
+                //                                    }
+                //                                }
+                //                            }
+                //                    }
 
                 Spacer()
                 BottomView(
@@ -63,8 +61,11 @@ struct Panel: View {
                 ProfileHost()
                     .environmentObject(modelData)
             }
+            //            .ignoresSafeArea(edges: .top)
+
+            SideBarButtons()
+                .offset(y: -150)
         }
-        .ignoresSafeArea(edges: .top)
     }
 }
 
@@ -136,7 +137,7 @@ struct SideBarButtons: View {
         }
         .accentColor(colorScheme == .dark ? .white : .black)
         .pickerStyle(.menu)
-//        .padding(.trailing, 16)
+        //        .padding(.trailing, 16)
     }
 }
 
@@ -151,105 +152,111 @@ struct BottomView: View {
     @Binding var images: [UIImage]
 
     var body: some View {
-        VStack {
-            TextField("Enter prompt", text: $drawable.prompt, axis: .vertical)
-                .placeholder(when: drawable.prompt.isEmpty) {
-                    Text("Enter prompt").foregroundColor(.gray)
-                }
-                .lineLimit(5)
-                .disableAutocorrection(true)
-                .frame(height: 77)
-                .textFieldStyle(PlainTextFieldStyle())
-                .padding([.horizontal], 16)
-                .background(colorScheme == .light ? .black : .white)
-                .foregroundColor(colorScheme == .dark ? .black : .white)
-                .cornerRadius(16)
-                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-            HStack {
-                Button("Generate") {
-                    images.removeAll()
-                    isLoading = true
-                    Task {
-                        do {
-                            let response = try await DallEImageGenerator.shared.generateImage(
-                                url: URL(string: "http://74.235.97.111/api/generate/")!,
-                                withPrompt: drawable.prompt,
-                                quantity: quantity,
-                                size: size
-                            )
+        GeometryReader { geometry in
+            VStack(alignment: .center) {
+                TextField("Enter prompt", text: $drawable.prompt, axis: .vertical)
+                    .placeholder(when: drawable.prompt.isEmpty) {
+                        Text("Enter prompt").foregroundColor(.gray)
+                    }
+                    .lineLimit(5)
+                    .disableAutocorrection(true)
+                    .frame(height: 77)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding([.horizontal], 16)
+                    .background(colorScheme == .light ? .black : .white)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
+                    .cornerRadius(16)
+                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                HStack {
+                    Button("Generate") {
+                        images.removeAll()
+                        isLoading = true
+                        Task {
+                            do {
+                                let response = try await DallEImageGenerator.shared.generateImage(
+                                    url: URL(string: "http://74.235.97.111/api/generate/")!,
+                                    withPrompt: drawable.prompt,
+                                    quantity: quantity,
+                                    size: size
+                                )
 
-                            for data in response.data {
-                                let (data, _) = try await URLSession.shared.data(from: data.url)
-                                imageData = data
+                                for data in response.data {
+                                    let (data, _) = try await URLSession.shared.data(from: data.url)
+                                    imageData = data
 
-                                images.append(UIImage(data: data)!)
+                                    images.append(UIImage(data: data)!)
 
-                                isLoading = false
-                                drawable.prompt = ""
+                                    isLoading = false
+                                    drawable.prompt = ""
+                                }
+                            } catch {
+                                print(error)
                             }
-                        } catch {
-                            print(error)
                         }
                     }
-                }
-                .frame(width: 190, height: 50)
-                .background(CustomColor.mint)
-                .foregroundColor(.black)
-                .controlSize(.large)
-                .cornerRadius(12)
+                    .frame(width: 190, height: 50)
+                    .background(CustomColor.mint)
+                    .foregroundColor(.black)
+                    .controlSize(.large)
+                    .cornerRadius(12)
 
-                ListenerView(drawable: $drawable)
+                    ListenerView(drawable: $drawable)
+                }
             }
+            .frame(width: geometry.size.width * 0.85, height: geometry.size.height, alignment: .bottom)
+            .padding(.horizontal, (geometry.size.width - geometry.size.width * 0.85) / 2)
         }
+        .frame(height: 135)
+
     }
 }
 
 struct CanvasContent: View {
-   var symbols = [
-    "keyboard",
-    "hifispeaker.fill",
-    "printer.fill",
-    "tv.fill",
-    "desktopcomputer",
-    "headphones",
-    "tv.music.note",
-    "mic",
-    "plus.bubble",
-    "video"
-   ]
+    var symbols = [
+        "keyboard",
+        "hifispeaker.fill",
+        "printer.fill",
+        "tv.fill",
+        "desktopcomputer",
+        "headphones",
+        "tv.music.note",
+        "mic",
+        "plus.bubble",
+        "video"
+    ]
 
     var gridItemLayout = [GridItem(.adaptive(minimum: 256))]
-//    var threeColumnGrid: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    //    var threeColumnGrid: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     var images: [UIImage]
     var body: some View {
-        ScrollView(.vertical) {
+        ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: gridItemLayout, spacing: 5) {
                 sequenceOfImages()
             }
-//            .padding(200)
+            //            .padding(200)
         }
     }
 
     func sequenceOfImages() -> some View {
         ForEach(symbols, id: \.self) { symbol in
-//        ForEach(images, id: \.self) { image in
+            //        ForEach(images, id: \.self) { image in
             VStack {
                 Image(systemName: symbol)
                     .resizable()
                     .scaledToFit()
-//                    .frame(height: 150)
+                //                    .frame(height: 150)
                     .cornerRadius(8)
 
 
-//                Image(uiImage: image)
-//                    .resizable()
-//                    .scaledToFit()
-//                Button("Save Image") {
-//                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-//                }
+                //                Image(uiImage: image)
+                //                    .resizable()
+                //                    .scaledToFit()
+                //                Button("Save Image") {
+                //                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                //                }
             }
             .padding()
-//            .frame(width: 256, height: 256)
+            //            .frame(width: 256, height: 256)
         }
     }
 }
