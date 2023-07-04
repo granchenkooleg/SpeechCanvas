@@ -20,7 +20,7 @@ struct Panel: View {
     @State private var isLoading: Bool = false
 
     var body: some View {
-        ZStack(alignment: .trailing) {
+        ZStack(alignment: .bottomTrailing) {
             VStack {
                 //                    if !images.isEmpty, !isLoading {
                 CanvasContent(images: images)
@@ -64,7 +64,7 @@ struct Panel: View {
             //            .ignoresSafeArea(edges: .top)
 
             SideBarButtons()
-                .offset(y: -150)
+                .offset(y: -170)
         }
     }
 }
@@ -112,11 +112,16 @@ struct SideBarButtons: View {
 
     var body: some View {
         VStack(alignment: .trailing) {
+
             Picker("", selection: $quantitySelection) {
                 ForEach(quantity, id: \.self) {
                     Text($0)
                 }
             }
+//            .frame(width: 44, height: 44)
+//            .blur(radius: 20)
+            .background (.ultraThinMaterial, in:
+            RoundedRectangle (cornerRadius: 16.0))
 
             Picker("", selection: $selection) {
                 ForEach(styles.sorted(by: >), id: \.key) { style in
@@ -128,12 +133,16 @@ struct SideBarButtons: View {
                     }
                 }
             }
+            .background (.ultraThinMaterial, in:
+            RoundedRectangle (cornerRadius: 16.0))
 
             Picker("", selection: $sizeSelection) {
                 ForEach(sizes, id: \.self) {
                     Text($0)
                 }
             }
+            .background (.ultraThinMaterial, in:
+            RoundedRectangle (cornerRadius: 16.0))
         }
         .accentColor(colorScheme == .dark ? .white : .black)
         .pickerStyle(.menu)
