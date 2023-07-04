@@ -21,29 +21,24 @@ struct Panel: View {
 
     var body: some View {
         ZStack(alignment: .trailing) {
-//            Color(uiColor: colorScheme == .light ? .white : .black)
-
-            SideBarButtons()
-                .offset(y: -100)
-
             VStack {
-                Spacer()
-                VStack {
-                    if !images.isEmpty, !isLoading {
-                        CanvasContent(images: images)
-                    } else {
-                        Rectangle()
-                            .fill(.clear)
-                            .overlay {
-                                if isLoading {
-                                    VStack {
-                                        ProgressView()
-                                        Text("Loading...")
-                                    }
-                                }
-                            }
-                    }
-                }
+//                    if !images.isEmpty, !isLoading {
+                    CanvasContent(images: images)
+//                    } else {
+//                        Rectangle()
+//                            .fill(.clear)
+//                            .overlay {
+//                                if isLoading {
+//                                    VStack {
+//                                        ProgressView()
+//                                        Text("Loading...")
+//                                    }
+//                                }
+//                            }
+//                    }
+
+//                SideBarButtons()
+//                    .offset(y: -100)
 
                 Spacer()
                 BottomView(
@@ -57,7 +52,6 @@ struct Panel: View {
                 )
             }
             .padding()
-            .navigationTitle("Canvas")
             .toolbar {
                 Button {
                     showingProfile.toggle()
@@ -172,36 +166,6 @@ struct BottomView: View {
                 .cornerRadius(16)
                 .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
             HStack {
-                Button("Edit") {
-                    images.removeAll()
-                    isLoading = true
-                    Task {
-                        do {
-                            let response = try await DallEImageGenerator.shared.generateImage(
-                                forEditImage: imageData,
-                                url: URL(string: "http://74.235.97.111/api/edit/")!,
-                                withPrompt: drawable.prompt,
-                                quantity: "1",
-                                size: size
-                            )
-
-                            if let url = response.data.map(\.url).first {
-                                let (data, _) = try await URLSession.shared.data(from: url)
-
-                                images.append(UIImage(data: data)!)
-                                isLoading = false
-                                drawable.prompt = ""
-                            }
-                        } catch {
-                            print(error)
-                        }
-                    }
-                }
-                .frame(width: 50, height: 50)
-                .background(colorScheme == .light ? .black : .white)
-                .foregroundColor(colorScheme == .dark ? .black : .white)
-                .cornerRadius(12)
-
                 Button("Generate") {
                     images.removeAll()
                     isLoading = true
@@ -241,42 +205,51 @@ struct BottomView: View {
 }
 
 struct CanvasContent: View {
+   var symbols = [
+    "keyboard",
+    "hifispeaker.fill",
+    "printer.fill",
+    "tv.fill",
+    "desktopcomputer",
+    "headphones",
+    "tv.music.note",
+    "mic",
+    "plus.bubble",
+    "video"
+   ]
+
+    var gridItemLayout = [GridItem(.adaptive(minimum: 256))]
+//    var threeColumnGrid: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     var images: [UIImage]
     var body: some View {
-        if UIDevice.isIPad {
-            GeometryReader { geometry in
-                ScrollView(.horizontal) {
-                    LazyHStack(spacing: 5) {
-                        sequenceOfImages()
-                    }
-                    .frame(width: geometry.size.width)
-                    .frame(minHeight: geometry.size.height)
-                }
+        ScrollView(.vertical) {
+            LazyVGrid(columns: gridItemLayout, spacing: 5) {
+                sequenceOfImages()
             }
-        } else {
-            GeometryReader { geometry in
-                ScrollView(.vertical) {
-                    LazyVStack(spacing: 5) {
-                        sequenceOfImages()
-                    }
-                    .frame(width: geometry.size.width)
-                    .frame(minHeight: geometry.size.height)
-                }
-            }
+//            .padding(200)
         }
     }
 
     func sequenceOfImages() -> some View {
-        ForEach(images, id: \.self) { image in
+        ForEach(symbols, id: \.self) { symbol in
+//        ForEach(images, id: \.self) { image in
             VStack {
-                Image(uiImage: image)
+                Image(systemName: symbol)
                     .resizable()
                     .scaledToFit()
-                Button("Save Image") {
-                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                }
+//                    .frame(height: 150)
+                    .cornerRadius(8)
+
+
+//                Image(uiImage: image)
+//                    .resizable()
+//                    .scaledToFit()
+//                Button("Save Image") {
+//                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//                }
             }
-            .frame(width: 256, height: 256)
+            .padding()
+//            .frame(width: 256, height: 256)
         }
     }
 }
