@@ -219,7 +219,9 @@ struct BottomView: View {
     }
 }
 
+
 struct CanvasContent: View {
+    @State private var selectedSymbol: String?
     @State var drawable: Drawable?
     var isSideBar: Bool = true
     var symbols = [
@@ -234,6 +236,8 @@ struct CanvasContent: View {
         "plus.bubble",
         "video"
     ]
+    
+    @State private var isPresented = false
     
     var gridItemLayout = [GridItem(.adaptive(minimum: 256), alignment: .center)]
     var gridItemLayoutSideBar = [GridItem(.adaptive(minimum: 50), spacing: 0, alignment: .center)]
@@ -262,30 +266,41 @@ struct CanvasContent: View {
     
     func sequenceOfImages() -> some View {
         ForEach(symbols, id: \.self) { symbol in
+            
             //        ForEach(images, id: \.self) { image in
-            if isSideBar {
-                Image(systemName: symbol)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                    .background(.brown)
-                    .border(.black)
-                //                        .padding()
-            } else {
-                Image(systemName: symbol)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 256, height: 256)
-                    .cornerRadius(8)
+            Group {
+                if isSideBar {
+                    Image(systemName: symbol)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                        .background(.brown)
+                        .border(.black)
+                        .onTapGesture {
+                            selectedSymbol = symbol
+                            isPresented = true
+                        }
+                } else {
+                    Image(systemName: symbol)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 256, height: 256)
+                        .cornerRadius(8)
+                        .onTapGesture {
+                            selectedSymbol = symbol
+                            isPresented = true
+                        }
+                }
             }
+            .buttonStyle(PlainButtonStyle())
             
             
             //                Image(uiImage: image)
             //                    .resizable()
             //                    .scaledToFit()
-            //                                Button("Save Image") {
-            //                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            //                                }
+        }
+        .fullScreenCover(isPresented: $isPresented) {
+            ImageDetails(image: selectedSymbol)
         }
     }
 }
