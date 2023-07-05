@@ -26,7 +26,7 @@ struct ContentView: View {
                     HistoryContent(images: [])
 //                    LandmarkList()
                         .tabItem {
-                            Label("List", systemImage: "list.bullet")
+                            Label("History", systemImage: "list.bullet")
                         }
                         .tag(Tab.list)
                 }

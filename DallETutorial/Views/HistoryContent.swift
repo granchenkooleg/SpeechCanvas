@@ -26,7 +26,7 @@ struct HistoryContent: View {
 
     @State private var isPresented = false
 
-    var gridItemLayout = [GridItem(.adaptive(minimum: 256), alignment: .center)]
+    var gridItemLayoutiPhone = [GridItem(.adaptive(minimum: 256), alignment: .center)]
     var gridItemLayoutSideBar = [GridItem(.adaptive(minimum: 50), spacing: 0, alignment: .center)]
     //    var threeColumnGrid: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     var images: [UIImage]
@@ -40,22 +40,20 @@ struct HistoryContent: View {
                     }
                 }
             }
+            .padding(.trailing, 16)
         } else {
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: gridItemLayout) {
+                LazyVGrid(columns: gridItemLayoutiPhone) {
                     sequenceOfImages()
                 }
             }
             .padding(.horizontal, 16)
         }
-
     }
 
     func sequenceOfImages() -> some View {
         ForEach(symbols, id: \.self) { symbol in
-
             //        ForEach(images, id: \.self) { image in
-            Group {
                 if isSideBar {
                     Image(systemName: symbol)
                         .resizable()
@@ -78,8 +76,6 @@ struct HistoryContent: View {
                             isPresented = true
                         }
                 }
-            }
-            .buttonStyle(PlainButtonStyle())
 
 
             //                Image(uiImage: image)
