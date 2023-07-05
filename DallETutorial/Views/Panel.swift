@@ -23,7 +23,7 @@ struct Panel: View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
                 //                    if !images.isEmpty, !isLoading {
-                CanvasContent(
+                HistoryContent(
                     drawable: drawable,
                     isSideBar: false,
                     images: images
@@ -67,7 +67,7 @@ struct Panel: View {
             }
             //            .ignoresSafeArea(edges: .top)
 
-            SideBarButtons()
+            SideButtons()
                 .offset(y: -170)
         }
     }

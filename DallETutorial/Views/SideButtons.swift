@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SideBarButtons: View {
+struct SideButtons: View {
     @State private var quantitySelection = "2"
     let quantity = [
         "1","2","3","4","5","6","7","8","9","10"

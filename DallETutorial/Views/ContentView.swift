@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             if UIDevice.isIPad {
-                CanvasContent(images: [])
+                HistoryContent(images: [])
 //                LandmarkList()
                 Panel()
             } else {
@@ -23,7 +23,7 @@ struct ContentView: View {
                         }
                         .tag(Tab.canvas)
 
-                    CanvasContent(images: [])
+                    HistoryContent(images: [])
 //                    LandmarkList()
                         .tabItem {
                             Label("List", systemImage: "list.bullet")

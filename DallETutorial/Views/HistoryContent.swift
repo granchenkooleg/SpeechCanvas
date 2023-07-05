@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CanvasContent: View {
+struct HistoryContent: View {
     @State private var selectedSymbol: String?
     @State var drawable: Drawable?
     var isSideBar: Bool = true
