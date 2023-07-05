@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HistoryContent: View {
-    @State private var selectedSymbol: String?
+struct CollectionContent: View {
+    @State var selectedSymbol: String = ""
     @State var drawable: Drawable?
     var isSideBar: Bool = true
     var symbols = [
@@ -83,7 +83,7 @@ struct HistoryContent: View {
             //                    .scaledToFit()
         }
         .fullScreenCover(isPresented: $isPresented) {
-            ImageDetails(image: selectedSymbol)
+            ImageDetails(image: $selectedSymbol)
         }
     }
 }

@@ -23,7 +23,7 @@ struct Panel: View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
                 //                    if !images.isEmpty, !isLoading {
-                HistoryContent(
+                CollectionContent(
                     drawable: drawable,
                     isSideBar: false,
                     images: images

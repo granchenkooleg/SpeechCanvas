@@ -33,7 +33,7 @@
 		9E8C7A042A45B59800A11542 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C7A032A45B59800A11542 /* Profile.swift */; };
 		9E8D81F82A55C7840027005D /* SideButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81F72A55C7840027005D /* SideButtons.swift */; };
 		9E8D81FA2A55C7A40027005D /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81F92A55C7A40027005D /* BottomView.swift */; };
-		9E8D81FC2A55C7C50027005D /* HistoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81FB2A55C7C50027005D /* HistoryContent.swift */; };
+		9E8D81FC2A55C7C50027005D /* CollectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81FB2A55C7C50027005D /* CollectionContent.swift */; };
 		9EADB3752A4480AD006F184E /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB3742A4480AD006F184E /* ModelData.swift */; };
 		9EADB37E2A448299006F184E /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB37B2A448299006F184E /* LandmarkRow.swift */; };
 		9EADB37F2A448299006F184E /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB37C2A448299006F184E /* LandmarkDetail.swift */; };
@@ -43,7 +43,6 @@
 		9EADB3902A4489C6006F184E /* hikeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9EADB38E2A4489C6006F184E /* hikeData.json */; };
 		9EADB3922A4489C6006F184E /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9EADB38F2A4489C6006F184E /* landmarkData.json */; };
 		9EED780C2A4A17E000525298 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED780B2A4A17E000525298 /* Panel.swift */; };
-		9EED78122A4A1D7E00525298 /* MacPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED780F2A4A1CDD00525298 /* MacPanel.swift */; };
 		9EED78162A4D979C00525298 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED78152A4D979C00525298 /* SideBar.swift */; };
 		9EED78182A4DB09000525298 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED78172A4DB09000525298 /* CustomColor.swift */; };
 		9EED781B2A4DD0F700525298 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED781A2A4DD0F700525298 /* UIDevice.swift */; };
@@ -77,7 +76,7 @@
 		9E8C7A032A45B59800A11542 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		9E8D81F72A55C7840027005D /* SideButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideButtons.swift; sourceTree = "<group>"; };
 		9E8D81F92A55C7A40027005D /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
-		9E8D81FB2A55C7C50027005D /* HistoryContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryContent.swift; sourceTree = "<group>"; };
+		9E8D81FB2A55C7C50027005D /* CollectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionContent.swift; sourceTree = "<group>"; };
 		9EADB3742A4480AD006F184E /* ModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		9EADB37B2A448299006F184E /* LandmarkRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
 		9EADB37C2A448299006F184E /* LandmarkDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkDetail.swift; sourceTree = "<group>"; };
@@ -88,7 +87,6 @@
 		9EADB38F2A4489C6006F184E /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
 		9EED780B2A4A17E000525298 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		9EED780E2A4A1B5C00525298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		9EED780F2A4A1CDD00525298 /* MacPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPanel.swift; sourceTree = "<group>"; };
 		9EED78152A4D979C00525298 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		9EED78172A4DB09000525298 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		9EED781A2A4DD0F700525298 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
@@ -195,11 +193,10 @@
 				9E57FFE82A38F74400C72B32 /* ListenerView.swift */,
 				5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */,
 				9EED780B2A4A17E000525298 /* Panel.swift */,
-				9EED780F2A4A1CDD00525298 /* MacPanel.swift */,
 				9E5B3C7D2A547E71009ED922 /* ImageDetails.swift */,
 				9E8D81F72A55C7840027005D /* SideButtons.swift */,
 				9E8D81F92A55C7A40027005D /* BottomView.swift */,
-				9E8D81FB2A55C7C50027005D /* HistoryContent.swift */,
+				9E8D81FB2A55C7C50027005D /* CollectionContent.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,7 +331,7 @@
 				9E57FFE72A38F57800C72B32 /* SpeechRecognizer.swift in Sources */,
 				5C4A9A1E291BAED000D2B2B5 /* ModerationResponse.swift in Sources */,
 				9E8D81FA2A55C7A40027005D /* BottomView.swift in Sources */,
-				9E8D81FC2A55C7C50027005D /* HistoryContent.swift in Sources */,
+				9E8D81FC2A55C7C50027005D /* CollectionContent.swift in Sources */,
 				9E8C79F92A45B44A00A11542 /* CategoryHome.swift in Sources */,
 				9E8C79F82A45B44A00A11542 /* CategoryRow.swift in Sources */,
 				9EADB3802A448299006F184E /* LandmarkList.swift in Sources */,
@@ -360,7 +357,6 @@
 				9EADB37F2A448299006F184E /* LandmarkDetail.swift in Sources */,
 				9E57FFEB2A38F94700C72B32 /* AVPlayer+Ding.swift in Sources */,
 				9E8D81F82A55C7840027005D /* SideButtons.swift in Sources */,
-				9EED78122A4A1D7E00525298 /* MacPanel.swift in Sources */,
 				5C4A9A20291BAF9900D2B2B5 /* ImageGenerationResponse.swift in Sources */,
 				9E8C7A042A45B59800A11542 /* Profile.swift in Sources */,
 				9EADB3752A4480AD006F184E /* ModelData.swift in Sources */,
@@ -510,7 +506,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = og.com;
+				PRODUCT_BUNDLE_IDENTIFIER = ogr.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -543,7 +539,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = og.com;
+				PRODUCT_BUNDLE_IDENTIFIER = ogr.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

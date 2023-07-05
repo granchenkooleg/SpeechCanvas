@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageDetails: View {
-    @State var image: String?
+    @Binding var image: String
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
 
@@ -29,18 +29,27 @@ struct ImageDetails: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                if let image = image {
+                Spacer()
+
+//                if let image = image {
                     Image(systemName: image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 256, height: 256)
 
+                    Spacer()
+
                     Button("Save Image") {
                         //                        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     }
-                }
+                    .frame(width: 190, height: 50)
+                    .background(colorScheme == .dark ? .white : .black)
+                    .foregroundColor(colorScheme == .light ? .white : .black)
+                    .controlSize(.large)
+                    .cornerRadius(12)
+                    .offset(y: -50)
+//                }
             }
-            .background(.red)
         }
     }
 }
