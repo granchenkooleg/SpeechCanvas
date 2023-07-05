@@ -31,6 +31,9 @@
 		9E8C7A002A45B50F00A11542 /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C79FD2A45B50F00A11542 /* ProfileHost.swift */; };
 		9E8C7A012A45B50F00A11542 /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C79FE2A45B50F00A11542 /* ProfileSummary.swift */; };
 		9E8C7A042A45B59800A11542 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C7A032A45B59800A11542 /* Profile.swift */; };
+		9E8D81F82A55C7840027005D /* SideBarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81F72A55C7840027005D /* SideBarButtons.swift */; };
+		9E8D81FA2A55C7A40027005D /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81F92A55C7A40027005D /* BottomView.swift */; };
+		9E8D81FC2A55C7C50027005D /* CanvasContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8D81FB2A55C7C50027005D /* CanvasContent.swift */; };
 		9EADB3752A4480AD006F184E /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB3742A4480AD006F184E /* ModelData.swift */; };
 		9EADB37E2A448299006F184E /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB37B2A448299006F184E /* LandmarkRow.swift */; };
 		9EADB37F2A448299006F184E /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADB37C2A448299006F184E /* LandmarkDetail.swift */; };
@@ -72,6 +75,9 @@
 		9E8C79FD2A45B50F00A11542 /* ProfileHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		9E8C79FE2A45B50F00A11542 /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		9E8C7A032A45B59800A11542 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		9E8D81F72A55C7840027005D /* SideBarButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarButtons.swift; sourceTree = "<group>"; };
+		9E8D81F92A55C7A40027005D /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		9E8D81FB2A55C7C50027005D /* CanvasContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasContent.swift; sourceTree = "<group>"; };
 		9EADB3742A4480AD006F184E /* ModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		9EADB37B2A448299006F184E /* LandmarkRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
 		9EADB37C2A448299006F184E /* LandmarkDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkDetail.swift; sourceTree = "<group>"; };
@@ -191,6 +197,9 @@
 				9EED780B2A4A17E000525298 /* Panel.swift */,
 				9EED780F2A4A1CDD00525298 /* MacPanel.swift */,
 				9E5B3C7D2A547E71009ED922 /* ImageDetails.swift */,
+				9E8D81F72A55C7840027005D /* SideBarButtons.swift */,
+				9E8D81F92A55C7A40027005D /* BottomView.swift */,
+				9E8D81FB2A55C7C50027005D /* CanvasContent.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,6 +333,8 @@
 				9EADB3882A448385006F184E /* FavoriteButton.swift in Sources */,
 				9E57FFE72A38F57800C72B32 /* SpeechRecognizer.swift in Sources */,
 				5C4A9A1E291BAED000D2B2B5 /* ModerationResponse.swift in Sources */,
+				9E8D81FA2A55C7A40027005D /* BottomView.swift in Sources */,
+				9E8D81FC2A55C7C50027005D /* CanvasContent.swift in Sources */,
 				9E8C79F92A45B44A00A11542 /* CategoryHome.swift in Sources */,
 				9E8C79F82A45B44A00A11542 /* CategoryRow.swift in Sources */,
 				9EADB3802A448299006F184E /* LandmarkList.swift in Sources */,
@@ -348,6 +359,7 @@
 				9E5B3C7E2A547E71009ED922 /* ImageDetails.swift in Sources */,
 				9EADB37F2A448299006F184E /* LandmarkDetail.swift in Sources */,
 				9E57FFEB2A38F94700C72B32 /* AVPlayer+Ding.swift in Sources */,
+				9E8D81F82A55C7840027005D /* SideBarButtons.swift in Sources */,
 				9EED78122A4A1D7E00525298 /* MacPanel.swift in Sources */,
 				5C4A9A20291BAF9900D2B2B5 /* ImageGenerationResponse.swift in Sources */,
 				9E8C7A042A45B59800A11542 /* Profile.swift in Sources */,
