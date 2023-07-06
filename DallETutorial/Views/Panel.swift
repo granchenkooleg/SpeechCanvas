@@ -42,7 +42,11 @@ struct Panel: View {
                 //                    }
 
                 Spacer()
-                BottomView(quantity: $quantity, style: $style, size: $size)
+                BottomView(
+                    quantity: $quantity,
+                    style: $style,
+                    size: $size
+                )
             }
             .padding()
             .toolbar {

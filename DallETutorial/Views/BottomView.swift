@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BottomView: View {
-    @State private var prompt: String = " Enter Prompt"
+    @State private var prompt: String = ""
     @Binding var quantity: String
     @Binding var style: String
     @Binding var size: String
@@ -24,9 +24,9 @@ struct BottomView: View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
                 TextField("Enter prompt", text: $prompt, axis: .vertical)
-//                    .placeholder(when: modelData.drawable[0].prompt.isEmpty) {
-//                        Text("Enter prompt").foregroundColor(.gray)
-//                    }
+                    .placeholder(when: prompt.isEmpty) {
+                        Text("Enter prompt").foregroundColor(.gray)
+                    }
                     .lineLimit(5)
                     .disableAutocorrection(true)
                     .frame(height: 77)
