@@ -22,8 +22,9 @@ struct CollectionContent: View {
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(modelData.histories) { history in
                     VStack(alignment: .leading, spacing: 5) {
-                        VStack(spacing: 0) {
-                            Text(history.date, format: .dateTime.day().month().year())
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(history.date, format: .dateTime
+                                .hour().minute().day().month().year())
                             Text(history.transcript)
                         }
                         LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
@@ -45,18 +46,18 @@ struct CollectionContent: View {
     }
 
     func sequenceImagesSideBar(of history: History) -> some View {
-            ForEach(history.images, id: \.self) { image in
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                    .background(.brown)
-                    .border(.black)
-                    .onTapGesture {
-                        selectedImage = image
-                        isPresented = true
-                    }
-            }
+        ForEach(history.images, id: \.self) { image in
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                .background(.brown)
+                .border(.black)
+                .onTapGesture {
+                    selectedImage = image
+                    isPresented = true
+                }
+        }
         .fullScreenCover(isPresented: $isPresented) {
             ImageDetails(image: $selectedImage)
         }
