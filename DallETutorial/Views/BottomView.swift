@@ -8,22 +8,25 @@
 import SwiftUI
 
 struct BottomView: View {
-    @Environment(\.colorScheme) var colorScheme
-    @Binding var size: String
+    @State private var prompt: String = " Enter Prompt"
     @Binding var quantity: String
-    @Binding var drawable: Drawable
-    @Binding var isLoading: Bool
-    @Binding var imageData: Data?
-    @Binding var image: UIImage?
-    @Binding var images: [UIImage]
+    @Binding var style: String
+    @Binding var size: String
+    @EnvironmentObject var modelData: ModelData
+    @Environment(\.colorScheme) var colorScheme
+    @State private var isLoading: Bool = false
+
+    private var promptWithSelectedStyle: String {
+        prompt + "with \(style) style."
+    }
 
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                TextField("Enter prompt", text: $drawable.prompt, axis: .vertical)
-                    .placeholder(when: drawable.prompt.isEmpty) {
-                        Text("Enter prompt").foregroundColor(.gray)
-                    }
+                TextField("Enter prompt", text: $prompt, axis: .vertical)
+//                    .placeholder(when: modelData.drawable[0].prompt.isEmpty) {
+//                        Text("Enter prompt").foregroundColor(.gray)
+//                    }
                     .lineLimit(5)
                     .disableAutocorrection(true)
                     .frame(height: 77)
@@ -35,29 +38,16 @@ struct BottomView: View {
                     .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
                 HStack {
                     Button("Generate") {
-                        images.removeAll()
+                        //                        modelData.images.removeAll()
                         isLoading = true
                         Task {
-                            do {
-                                let response = try await DallEImageGenerator.shared.generateImage(
-                                    url: URL(string: "http://74.235.97.111/api/generate/")!,
-                                    withPrompt: drawable.prompt,
-                                    quantity: quantity,
-                                    size: size
-                                )
-
-                                for data in response.data {
-                                    let (data, _) = try await URLSession.shared.data(from: data.url)
-                                    imageData = data
-
-                                    images.append(UIImage(data: data)!)
-
-                                    isLoading = false
-                                    drawable.prompt = ""
-                                }
-                            } catch {
-                                print(error)
-                            }
+                            try await modelData.generateImage(
+                                url: URL(string: DallEAPI.generateURL)!,
+                                with: promptWithSelectedStyle,
+                                quantity: quantity,
+                                size: size
+                            )
+                            isLoading = false
                         }
                     }
                     .frame(width: 190, height: 50)
@@ -66,7 +56,7 @@ struct BottomView: View {
                     .controlSize(.large)
                     .cornerRadius(12)
 
-                    ListenerView(drawable: $drawable)
+                    ListenerView()
                 }
             }
             .frame(width: geometry.size.width * 0.85, height: geometry.size.height, alignment: .bottom)

@@ -60,9 +60,3 @@ struct SideBar: View {
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
-
-struct SideBarsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SideBar()
-    }
-}

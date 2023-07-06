@@ -7,42 +7,67 @@ Storage for model data.
 
 import Foundation
 import Combine
+import SwiftUI
 
 final class ModelData: ObservableObject {
-    @Published var landmarks: [Landmark] = load("landmarkData.json")
-//    var hikes: [Hike] = load("hikeData.json")
+    @Published var drawable: [Drawable] = []
     @Published var profile = Profile.default
 
-    var features: [Landmark] {
-        landmarks.filter { $0.isFeatured }
-    }
+//    var features: [Landmark] {
+//        landmarks.filter { $0.isFeatured }
+//    }
+//
+//    var categories: [String: [Landmark]] {
+//        Dictionary(
+//            grouping: landmarks,
+//            by: { $0.category.rawValue }
+//        )
+//    }
 
-    var categories: [String: [Landmark]] {
-        Dictionary(
-            grouping: landmarks,
-            by: { $0.category.rawValue }
-        )
+    func generateImage(
+        url: URL,
+        with prompt: String,
+        quantity: String,
+        size: String
+    ) async throws {
+        do {
+            let response = try await DallEImageGenerator.shared.generateImage(
+                url: url,
+                withPrompt: prompt,
+                quantity: quantity,
+                size: size
+            )
+
+            for data in response.data {
+                let (data, _) = try await URLSession.shared.data(from: data.url)
+//                modelData.imageData = data
+//
+//                modelData.images.append(UIImage(data: data)!)
+            }
+        } catch {
+            print(error)
+        }
     }
 }
 
-func load<T: Decodable>(_ filename: String) -> T {
-    let data: Data
-
-    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-        else {
-            fatalError("Couldn't find \(filename) in main bundle.")
-    }
-
-    do {
-        data = try Data(contentsOf: file)
-    } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-    }
-
-    do {
-        let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
-    } catch {
-        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
-    }
-}
+//func load<T: Decodable>(_ filename: String) -> T {
+//    let data: Data
+//
+//    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+//        else {
+//            fatalError("Couldn't find \(filename) in main bundle.")
+//    }
+//
+//    do {
+//        data = try Data(contentsOf: file)
+//    } catch {
+//        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+//    }
+//
+//    do {
+//        let decoder = JSONDecoder()
+//        return try decoder.decode(T.self, from: data)
+//    } catch {
+//        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+//    }
+//}

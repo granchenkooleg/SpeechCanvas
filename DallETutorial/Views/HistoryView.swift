@@ -33,13 +33,3 @@ struct HistoryView: View {
 //        ListFormatter.localizedString(byJoining: attendees.map { $0.name })
 //    }
 //}
-
-struct HistoryView_Previews: PreviewProvider {
-    static var history: History {
-        History(transcript: "Happy snail under an umbrella on the street")
-    }
-    
-    static var previews: some View {
-        HistoryView(history: history)
-    }
-}

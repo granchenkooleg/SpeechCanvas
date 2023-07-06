@@ -4,39 +4,29 @@ import SwiftUI
 struct Drawable: Identifiable, Codable {
     let id: UUID
     var prompt: String
-//    var title: String
-//    var lengthInMinutes: Int
-//    var lengthInMinutesAsDouble: Double { // length of characters
-//        get {
-//            Double(lengthInMinutes)
-//        }
-//        set {
-//            lengthInMinutes = Int(newValue)
-//        }
-//    }
-    var theme: Theme
+    var size: String
+    var quantity: String
+    var style: Style
     var history: [History] = []
-    
-    init(id: UUID = UUID(), prompt: String, theme: Theme) {
+//    var images: [UIImage] = []
+    var symbols = [
+        "keyboard",
+        "hifispeaker.fill",
+        "printer.fill",
+        "tv.fill",
+        "desktopcomputer",
+        "headphones",
+        "tv.music.note",
+        "mic",
+        "plus.bubble",
+        "video"
+    ]
+
+    init(id: UUID = UUID(), prompt: String, size: String, quantity: String, style: Style) {
         self.id = id
         self.prompt = prompt
-//        self.title = title
-//        self.lengthInMinutes = lengthInMinutes
-        self.theme = theme
+        self.size = size
+        self.quantity = quantity
+        self.style = style
     }
 }
-
-//extension Drawable {
-//    static let sampleData: [Drawable] =
-//    [
-//        Drawable(title: "Design",
-//                   lengthInMinutes: 10,
-//                   theme: .yellow),
-//        Drawable(title: "App Dev",
-//                   lengthInMinutes: 5,
-//                   theme: .orange),
-//        Drawable(title: "Web Dev",
-//                   lengthInMinutes: 5,
-//                   theme: .poppy)
-//    ]
-//}

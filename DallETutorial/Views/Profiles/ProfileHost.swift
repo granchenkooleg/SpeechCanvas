@@ -40,10 +40,3 @@ struct ProfileHost: View {
         .padding()
     }
 }
-
-struct ProfileHost_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileHost()
-            .environmentObject(ModelData())
-    }
-}

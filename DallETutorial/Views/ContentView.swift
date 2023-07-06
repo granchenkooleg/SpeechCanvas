@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var drawable = Drawable(prompt: "", theme: .indigo)
     @State private var selection: Tab = .canvas
     
     enum Tab {
@@ -12,8 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             if UIDevice.isIPad {
-                CollectionContent(images: [])
-//                LandmarkList()
+                CollectionContent()
                 Panel()
             } else {
                 TabView(selection: $selection) {
@@ -23,8 +21,7 @@ struct ContentView: View {
                         }
                         .tag(Tab.canvas)
 
-                    CollectionContent(images: [])
-//                    LandmarkList()
+                    CollectionContent()
                         .tabItem {
                             Label("History", systemImage: "list.bullet")
                         }
@@ -37,13 +34,6 @@ struct ContentView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.top)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(ModelData())
     }
 }
 

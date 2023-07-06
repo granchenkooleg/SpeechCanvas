@@ -9,32 +9,19 @@ import SwiftUI
 
 struct CollectionContent: View {
     @State var selectedSymbol: String = ""
-    @State var drawable: Drawable?
+    @EnvironmentObject var modelData: ModelData
     var isSideBar: Bool = true
-    var symbols = [
-        "keyboard",
-        "hifispeaker.fill",
-        "printer.fill",
-        "tv.fill",
-        "desktopcomputer",
-        "headphones",
-        "tv.music.note",
-        "mic",
-        "plus.bubble",
-        "video"
-    ]
 
     @State private var isPresented = false
 
-    var gridItemLayoutiPhone = [GridItem(.adaptive(minimum: 256), alignment: .center)]
+    var gridItemLayoutSideBariPhone = [GridItem(.adaptive(minimum: 256), alignment: .center)]
     var gridItemLayoutSideBar = [GridItem(.adaptive(minimum: 50), spacing: 0, alignment: .center)]
-    //    var threeColumnGrid: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    var images: [UIImage]
+    
     var body: some View {
         if isSideBar {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(drawable?.prompt ?? "Prompt, prompt, prompt")
+                    Text(modelData.drawable.first?.prompt ?? "")
                     LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
                         sequenceOfImages()
                     }
@@ -43,7 +30,7 @@ struct CollectionContent: View {
             .padding(.trailing, 16)
         } else {
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: gridItemLayoutiPhone) {
+                LazyVGrid(columns: gridItemLayoutSideBariPhone) {
                     sequenceOfImages()
                 }
             }
@@ -52,7 +39,7 @@ struct CollectionContent: View {
     }
 
     func sequenceOfImages() -> some View {
-        ForEach(symbols, id: \.self) { symbol in
+        ForEach(modelData.drawable.first?.symbols ?? [], id: \.self) { symbol in
             //        ForEach(images, id: \.self) { image in
                 if isSideBar {
                     Image(systemName: symbol)

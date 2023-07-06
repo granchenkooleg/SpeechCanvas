@@ -24,9 +24,3 @@ struct CategoryItem: View {
         .padding(.leading, 15)
     }
 }
-
-struct CategoryItem_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryItem(landmark: ModelData().landmarks[0])
-    }
-}

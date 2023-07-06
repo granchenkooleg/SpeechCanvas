@@ -12,9 +12,10 @@ struct Panel: View {
     @EnvironmentObject var modelData: ModelData
     @State private var showingProfile = false
     @Environment(\.colorScheme) var colorScheme
-    @State var drawable: Drawable = Drawable(prompt: "", theme: .bubblegum)
-    @State private var size: String = "256x256"
     @State private var quantity: String = "1"
+    @State private var style: String = "Pixar"
+    @State private var size: String = "256x256"
+
     @State private var image: UIImage?
     @State private var images: [UIImage] = []
     @State private var isLoading: Bool = false
@@ -24,9 +25,7 @@ struct Panel: View {
             VStack {
                 //                    if !images.isEmpty, !isLoading {
                 CollectionContent(
-                    drawable: drawable,
-                    isSideBar: false,
-                    images: images
+                    isSideBar: false
                 )
 
                 //                    } else {
@@ -43,15 +42,7 @@ struct Panel: View {
                 //                    }
 
                 Spacer()
-                BottomView(
-                    size: $size,
-                    quantity: $quantity,
-                    drawable: $drawable,
-                    isLoading: $isLoading,
-                    imageData: $imageData,
-                    image: $image,
-                    images: $images
-                )
+                BottomView(quantity: $quantity, style: $style, size: $size)
             }
             .padding()
             .toolbar {
@@ -67,7 +58,11 @@ struct Panel: View {
             }
             //            .ignoresSafeArea(edges: .top)
 
-            SideButtons()
+            SideButtons(
+                quantitySelection: $quantity,
+                styleSelection: $style,
+                sizeSelection: $size
+            )
                 .offset(y: -170)
         }
     }
