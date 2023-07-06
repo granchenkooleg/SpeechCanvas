@@ -28,7 +28,7 @@ struct BottomView: View {
                         Text("Enter prompt").foregroundColor(.gray)
                     }
                     .lineLimit(5)
-                    .disableAutocorrection(true)
+                    .autocorrectionDisabled(true)
                     .frame(height: 77)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 16)

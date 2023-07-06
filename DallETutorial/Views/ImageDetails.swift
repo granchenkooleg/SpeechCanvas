@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ImageDetails: View {
+    @State private var quantity: String = "1"
+    @State private var style: String = ""
+    @State private var size: String = ""
+    @State private var isLoading: Bool = false
     @Binding var image: UIImage?
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
@@ -28,7 +32,7 @@ struct ImageDetails: View {
                 }
                 .edgesIgnoringSafeArea(.all)
 
-            VStack {
+            VStack(spacing: 20) {
                 Spacer()
 
                 if let image = image {
@@ -36,8 +40,6 @@ struct ImageDetails: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 256, height: 256)
-
-                    Spacer()
 
                     Button("Save Image") {
                         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -47,8 +49,17 @@ struct ImageDetails: View {
                     .foregroundColor(colorScheme == .light ? .white : .black)
                     .controlSize(.large)
                     .cornerRadius(12)
-                    .offset(y: -50)
                 }
+
+                Spacer()
+
+                BottomView(
+                    quantitySelected: $quantity,
+                    styleSelected: $style,
+                    sizeSelected: $size,
+                    isLoading: $isLoading
+                )
+                .offset(y: -20)
             }
         }
     }
