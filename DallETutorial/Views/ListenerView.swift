@@ -7,8 +7,6 @@ struct ListenerView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
 
-    private var player: AVPlayer { AVPlayer.sharedDingPlayer }
-
     var body: some View {
         Button(action: {
             if !isRecording {

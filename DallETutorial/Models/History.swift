@@ -9,5 +9,5 @@ struct History: Identifiable {
     let id = UUID()
     let date: Date
     var images: [UIImage]
-    var transcript: String?
+    var transcript: String
 }

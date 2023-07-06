@@ -20,28 +20,32 @@ struct CollectionContent: View {
     var body: some View {
         if isSideBar {
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(Date.now, format: .dateTime.day().month().year())
-                    Text(modelData.drawable.first?.prompt ?? "")
-                    LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
-                        sequenceOfImages()
+                ForEach(modelData.histories) { history in
+                    VStack(alignment: .leading, spacing: 5) {
+                        VStack(spacing: 0) {
+                            Text(history.date, format: .dateTime.day().month().year())
+                            Text(history.transcript)
+                        }
+                        LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
+                            sequenceImagesSideBar(of: history)
+                        }
                     }
+                    .padding(.bottom, 10)
                 }
             }
-            .padding(.trailing, 16)
+            .padding(.horizontal, 5)
         } else {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: gridItemLayoutSideBariPhone) {
                     sequenceOfImages()
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 5)
         }
     }
 
-    func sequenceOfImages() -> some View {
-        ForEach(modelData.images, id: \.self) { image in
-            if isSideBar {
+    func sequenceImagesSideBar(of history: History) -> some View {
+            ForEach(history.images, id: \.self) { image in
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
@@ -52,17 +56,24 @@ struct CollectionContent: View {
                         selectedImage = image
                         isPresented = true
                     }
-            } else {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 256, height: 256)
-                    .cornerRadius(8)
-                    .onTapGesture {
-                        selectedImage = image
-                        isPresented = true
-                    }
             }
+        .fullScreenCover(isPresented: $isPresented) {
+            ImageDetails(image: $selectedImage)
+        }
+    }
+
+    func sequenceOfImages() -> some View {
+        ForEach(modelData.images, id: \.self) { image in
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 256, height: 256)
+                .cornerRadius(8)
+                .background(.brown)
+                .onTapGesture {
+                    selectedImage = image
+                    isPresented = true
+                }
         }
         .fullScreenCover(isPresented: $isPresented) {
             ImageDetails(image: $selectedImage)

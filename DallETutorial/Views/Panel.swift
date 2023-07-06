@@ -19,7 +19,7 @@ struct Panel: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
-                if !modelData.drawable.isEmpty, !isLoading {
+                if !modelData.images.isEmpty, !isLoading {
                     CollectionContent(
                         isSideBar: false
                     )
