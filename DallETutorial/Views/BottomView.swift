@@ -50,13 +50,14 @@ struct BottomView: View {
                             isLoading = false
                         }
                     }
+                    .disabled(prompt.isEmpty)
                     .frame(width: 190, height: 50)
-                    .background(CustomColor.mint)
-                    .foregroundColor(.black)
+                    .background(prompt.isEmpty ? Color(UIColor.systemGray5) : CustomColor.mint)
+                    .foregroundColor(prompt.isEmpty ? Color(UIColor.systemGray3) : .black)
                     .controlSize(.large)
                     .cornerRadius(12)
 
-                    ListenerView()
+                    ListenerView(prompt: $prompt)
                 }
             }
             .frame(width: geometry.size.width * 0.85, height: geometry.size.height, alignment: .bottom)

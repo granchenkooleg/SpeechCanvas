@@ -7,7 +7,6 @@ struct Drawable: Identifiable, Codable {
     var size: String
     var quantity: String
     var style: Style
-    var history: [History] = []
 //    var images: [UIImage] = []
     var symbols = [
         "keyboard",

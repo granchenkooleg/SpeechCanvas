@@ -11,6 +11,7 @@ import SwiftUI
 
 final class ModelData: ObservableObject {
     @Published var drawable: [Drawable] = []
+    var history: [History] = []
     @Published var profile = Profile.default
 
 //    var features: [Landmark] {

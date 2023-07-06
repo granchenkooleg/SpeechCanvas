@@ -2,6 +2,7 @@ import SwiftUI
 import AVFoundation
 
 struct ListenerView: View {
+    @Binding var prompt: String
     @EnvironmentObject var modelData: ModelData
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
@@ -36,7 +37,7 @@ struct ListenerView: View {
         speechRecognizer.stopTranscribing()
         isRecording = false
         let newHistory = History(transcript: speechRecognizer.transcript)
-        modelData.drawable[0].history.insert(newHistory, at: 0)
-        modelData.drawable[0].prompt = speechRecognizer.transcript
+        modelData.history.insert(newHistory, at: 0)
+        prompt = speechRecognizer.transcript
     }
 }
