@@ -1,34 +1,37 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+ See LICENSE folder for this sample’s licensing information.
 
-Abstract:
-Storage for model data.
-*/
+ Abstract:
+ Storage for model data.
+ */
 
 import Foundation
 import Combine
 import SwiftUI
 
 final class ModelData: ObservableObject {
+    @Published var showingAlert = false
+    var images: [UIImage] = []
     @Published var drawable: [Drawable] = []
     var history: [History] = []
     @Published var profile = Profile.default
 
-//    var features: [Landmark] {
-//        landmarks.filter { $0.isFeatured }
-//    }
-//
-//    var categories: [String: [Landmark]] {
-//        Dictionary(
-//            grouping: landmarks,
-//            by: { $0.category.rawValue }
-//        )
-//    }
+    //    var features: [Landmark] {
+    //        landmarks.filter { $0.isFeatured }
+    //    }
+    //
+    //    var categories: [String: [Landmark]] {
+    //        Dictionary(
+    //            grouping: landmarks,
+    //            by: { $0.category.rawValue }
+    //        )
+    //    }
 
     func generateImage(
         url: URL,
         with prompt: String,
         quantity: String,
+        style: String,
         size: String
     ) async throws {
         do {
@@ -41,12 +44,26 @@ final class ModelData: ObservableObject {
 
             for data in response.data {
                 let (data, _) = try await URLSession.shared.data(from: data.url)
-//                modelData.imageData = data
-//
-//                modelData.images.append(UIImage(data: data)!)
+                //                modelData.imageData = data
+                images.append(UIImage(data: data)!)
             }
+
+//            await MainActor.run {
+                drawable.append(
+                    Drawable(
+                        prompt: prompt,
+                        size: size,
+                        quantity: quantity,
+                        style: style,
+                        images: images
+                    )
+                )
+//            }
         } catch {
-            print(error)
+            DispatchQueue.main.async {
+                self.showingAlert = true
+            }
+            print("⚠️⚠️⚠️ \(error.localizedDescription)")
         }
     }
 }

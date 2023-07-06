@@ -9,15 +9,15 @@ import SwiftUI
 
 struct BottomView: View {
     @State private var prompt: String = ""
-    @Binding var quantity: String
-    @Binding var style: String
-    @Binding var size: String
+    @Binding var quantitySelected: String
+    @Binding var styleSelected: String
+    @Binding var sizeSelected: String
     @EnvironmentObject var modelData: ModelData
     @Environment(\.colorScheme) var colorScheme
-    @State private var isLoading: Bool = false
+    @Binding var isLoading: Bool
 
     private var promptWithSelectedStyle: String {
-        prompt + "with \(style) style."
+        prompt + "with \(styleSelected) style."
     }
 
     var body: some View {
@@ -38,14 +38,15 @@ struct BottomView: View {
                     .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
                 HStack {
                     Button("Generate") {
-                        //                        modelData.images.removeAll()
+                        modelData.images.removeAll()
                         isLoading = true
                         Task {
                             try await modelData.generateImage(
                                 url: URL(string: DallEAPI.generateURL)!,
                                 with: promptWithSelectedStyle,
-                                quantity: quantity,
-                                size: size
+                                quantity: quantitySelected,
+                                style: styleSelected,
+                                size: sizeSelected
                             )
                             isLoading = false
                         }

@@ -1,13 +1,13 @@
 import Foundation
 import SwiftUI
 
-struct Drawable: Identifiable, Codable {
-    let id: UUID
+struct Drawable: Identifiable {
+    var id = UUID()
     var prompt: String
     var size: String
     var quantity: String
-    var style: Style
-//    var images: [UIImage] = []
+    var style: String
+    var images: [UIImage]
     var symbols = [
         "keyboard",
         "hifispeaker.fill",
@@ -20,12 +20,4 @@ struct Drawable: Identifiable, Codable {
         "plus.bubble",
         "video"
     ]
-
-    init(id: UUID = UUID(), prompt: String, size: String, quantity: String, style: Style) {
-        self.id = id
-        self.prompt = prompt
-        self.size = size
-        self.quantity = quantity
-        self.style = style
-    }
 }

@@ -8,7 +8,6 @@
 //import SwiftUI
 //
 //struct LandmarkList: View {
-////    @State var drawable: Drawable
 //    @EnvironmentObject var modelData: ModelData
 //    @State private var showFavoritesOnly = false
 //    @State private var filter = FilterCategory.all
