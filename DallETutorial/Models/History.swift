@@ -3,17 +3,11 @@
  */
 
 import Foundation
+import UIKit
 
-struct History: Identifiable, Codable {
-    let id: UUID
+struct History: Identifiable {
+    let id = UUID()
     let date: Date
-//    var attendees: [DailyScrum.Attendee]
+    var images: [UIImage]
     var transcript: String?
-    
-    init(id: UUID = UUID(), date: Date = Date(), transcript: String? = nil) {
-        self.id = id
-        self.date = date
-//        self.attendees = attendees
-        self.transcript = transcript
-    }
 }

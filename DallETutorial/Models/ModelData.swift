@@ -58,6 +58,13 @@ final class ModelData: ObservableObject {
                         images: images
                     )
                 )
+
+//            let date = Date()
+//            let calendar = Calendar.current
+//            let hour = calendar.component(.hour, from: date)
+//            let minutes = calendar.component(.minute, from: date)
+
+            history.append(History(date: Date(), images: images, transcript: prompt))
 //            }
         } catch {
             DispatchQueue.main.async {

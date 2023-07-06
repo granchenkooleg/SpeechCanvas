@@ -6,9 +6,9 @@ struct ListenerView: View {
     @EnvironmentObject var modelData: ModelData
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
-    
+
     private var player: AVPlayer { AVPlayer.sharedDingPlayer }
-    
+
     var body: some View {
         Button(action: {
             if !isRecording {
@@ -23,8 +23,6 @@ struct ListenerView: View {
                 .scaledToFit()
                 .frame(width: 50, height: 50)
         }
-
-        //        .textFieldStyle(.roundedBorder)
     }
     
     private func startListen() {
@@ -32,12 +30,10 @@ struct ListenerView: View {
         speechRecognizer.startTranscribing()
         isRecording = true
     }
-    
+
     private func endListen() {
         speechRecognizer.stopTranscribing()
         isRecording = false
-        let newHistory = History(transcript: speechRecognizer.transcript)
-        modelData.history.insert(newHistory, at: 0)
         prompt = speechRecognizer.transcript
     }
 }

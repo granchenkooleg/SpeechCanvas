@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageDetails: View {
-    @Binding var image: String
+    @Binding var image: UIImage?
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
 
@@ -31,8 +31,8 @@ struct ImageDetails: View {
             VStack {
                 Spacer()
 
-//                if let image = image {
-                    Image(systemName: image)
+                if let image = image {
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 256, height: 256)
@@ -40,7 +40,7 @@ struct ImageDetails: View {
                     Spacer()
 
                     Button("Save Image") {
-                        //                        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     }
                     .frame(width: 190, height: 50)
                     .background(colorScheme == .dark ? .white : .black)
@@ -48,7 +48,7 @@ struct ImageDetails: View {
                     .controlSize(.large)
                     .cornerRadius(12)
                     .offset(y: -50)
-//                }
+                }
             }
         }
     }
