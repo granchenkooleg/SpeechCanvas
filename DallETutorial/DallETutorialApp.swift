@@ -8,6 +8,7 @@ struct DallETutorialApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(modelData)
+                .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
         }
     }
 }

@@ -17,7 +17,7 @@ struct ImageDetails: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ZStack() {
+        ZStack(alignment: .bottomTrailing) {
             Color(uiColor: .clear)//colorScheme == .light ? .white : .black)
                 .overlay(alignment: .topTrailing) {
                     Button {
@@ -61,6 +61,13 @@ struct ImageDetails: View {
                 )
                 .offset(y: -20)
             }
-        }
+
+            SideButtons(
+                quantitySelection: $quantity,
+                styleSelection: $style,
+                sizeSelection: $size
+            )
+                .offset(y: -170)
+        }.keyboardAware()
     }
 }
