@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BottomView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var prompt: String = ""
     @Binding var quantitySelected: String
     @Binding var styleSelected: String
@@ -17,7 +18,7 @@ struct BottomView: View {
     @Binding var isLoading: Bool
 
     private var promptWithSelectedStyle: String {
-        prompt + "with \(styleSelected) style."
+        prompt + ", with \(styleSelected) style."
     }
 
     var body: some View {
@@ -49,6 +50,8 @@ struct BottomView: View {
                                 size: sizeSelected
                             )
                             isLoading = false
+                            prompt = ""
+                            dismiss()
                         }
                     }
                     .disabled(prompt.isEmpty)
