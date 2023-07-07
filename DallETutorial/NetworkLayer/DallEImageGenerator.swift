@@ -94,7 +94,7 @@ class DallEImageGenerator {
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
         var request = URLRequest(url: url)
-        request.addValue("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", forHTTPHeaderField: "Authorization")
+        request.addValue("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", forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"

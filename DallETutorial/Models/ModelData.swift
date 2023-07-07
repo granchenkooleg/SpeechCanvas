@@ -43,6 +43,7 @@ final class ModelData: ObservableObject {
     //    }
 
     func generateImage(
+        forEditImage imageData: Data? = nil,
         url: URL,
         with prompt: String,
         quantity: String,
@@ -51,6 +52,7 @@ final class ModelData: ObservableObject {
     ) async throws {
         do {
             let response = try await DallEImageGenerator.shared.generateImage(
+                forEditImage: imageData,
                 url: url,
                 withPrompt: prompt,
                 quantity: quantity,

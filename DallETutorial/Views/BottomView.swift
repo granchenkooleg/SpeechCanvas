@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BottomView: View {
+    @State var image: UIImage?
     @Environment(\.dismiss) var dismiss
     @State private var prompt: String = ""
     @Binding var quantitySelected: String
@@ -42,13 +43,25 @@ struct BottomView: View {
                         modelData.images.removeAll()
                         isLoading = true
                         Task {
-                            try await modelData.generateImage(
-                                url: URL(string: DallEAPI.generateURL)!,
-                                with: promptWithSelectedStyle,
-                                quantity: quantitySelected,
-                                style: styleSelected,
-                                size: sizeSelected
-                            )
+                            if let image = image {
+                                try await modelData.generateImage(
+                                    forEditImage: image.jpegData(compressionQuality: 0.8),
+                                    url: URL(string: DallEAPI.editImageURL)!,
+                                    with: promptWithSelectedStyle,
+                                    quantity: quantitySelected,
+                                    style: styleSelected,
+                                    size: sizeSelected
+                                )
+
+                            } else {
+                                try await modelData.generateImage(
+                                    url: URL(string: DallEAPI.generateURL)!,
+                                    with: promptWithSelectedStyle,
+                                    quantity: quantitySelected,
+                                    style: styleSelected,
+                                    size: sizeSelected
+                                )
+                            }
                             isLoading = false
                             prompt = ""
                             dismiss()

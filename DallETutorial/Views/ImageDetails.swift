@@ -22,13 +22,13 @@ struct ImageDetails: View {
             Color(uiColor: .clear)//colorScheme == .light ? .white : .black)
                 .overlay(alignment: .topTrailing) {
 
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "x.circle.fill")
-                                .padding(.trailing, 20)
-                        }
-                        .buttonStyle(.plain)
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "x.circle.fill")
+                            .padding(.trailing, 20)
+                    }
+                    .buttonStyle(.plain)
 
                     .imageScale(.large)
                     .padding(.top, 35)
@@ -62,6 +62,7 @@ struct ImageDetails: View {
                 Spacer()
 
                 BottomView(
+                    image: image,
                     quantitySelected: $quantity,
                     styleSelected: $style,
                     sizeSelected: $size,
@@ -75,7 +76,7 @@ struct ImageDetails: View {
                 styleSelection: $style,
                 sizeSelection: $size
             )
-                .offset(y: -170)
+            .offset(y: -170)
         }.keyboardAware()
     }
 }
