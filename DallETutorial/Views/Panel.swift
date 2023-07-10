@@ -1,6 +1,5 @@
 //
 //  Panel.swift
-//  DallETutorial
 //
 //  Created by Oleg Granchenko on 26.06.2023.
 //

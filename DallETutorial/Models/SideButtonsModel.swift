@@ -1,6 +1,5 @@
 //
 //  SideButtonsModel.swift
-//  DallETutorial
 //
 //  Created by Oleg Granchenko on 06.07.2023.
 //

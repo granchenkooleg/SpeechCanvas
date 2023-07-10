@@ -1,6 +1,5 @@
 //
 //  UIApplication.swift
-//  DallETutorial
 //
 //  Created by Oleg Granchenko on 07.07.2023.
 //

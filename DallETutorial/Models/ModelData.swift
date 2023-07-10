@@ -31,17 +31,6 @@ final class ModelData: ObservableObject {
     ]
     @Published var profile = Profile.default
 
-    //    var features: [Landmark] {
-    //        landmarks.filter { $0.isFeatured }
-    //    }
-    //
-    //    var categories: [String: [Landmark]] {
-    //        Dictionary(
-    //            grouping: landmarks,
-    //            by: { $0.category.rawValue }
-    //        )
-    //    }
-
     func generateImage(
         forEditImage imageData: Data? = nil,
         url: URL,
@@ -65,13 +54,7 @@ final class ModelData: ObservableObject {
                 images.append(UIImage(data: data)!)
             }
 
-//            let date = Date()
-//            let calendar = Calendar.current
-//            let hour = calendar.component(.hour, from: date)
-//            let minutes = calendar.component(.minute, from: date)
-
             histories.append(History(date: Date(), images: images, transcript: prompt))
-//            }
         } catch {
             DispatchQueue.main.async {
                 self.showingAlert = true
@@ -80,25 +63,3 @@ final class ModelData: ObservableObject {
         }
     }
 }
-
-//func load<T: Decodable>(_ filename: String) -> T {
-//    let data: Data
-//
-//    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-//        else {
-//            fatalError("Couldn't find \(filename) in main bundle.")
-//    }
-//
-//    do {
-//        data = try Data(contentsOf: file)
-//    } catch {
-//        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-//    }
-//
-//    do {
-//        let decoder = JSONDecoder()
-//        return try decoder.decode(T.self, from: data)
-//    } catch {
-//        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
-//    }
-//}

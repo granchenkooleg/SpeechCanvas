@@ -1,6 +1,5 @@
 //
-//  CanvasContent.swift
-//  DallETutorial
+//  CollectionContent.swift
 //
 //  Created by Oleg Granchenko on 05.07.2023.
 //

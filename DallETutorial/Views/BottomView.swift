@@ -1,6 +1,5 @@
 //
 //  BottomView.swift
-//  DallETutorial
 //
 //  Created by Oleg Granchenko on 05.07.2023.
 //
@@ -46,7 +45,7 @@ struct BottomView: View {
                             if let image = image {
                                 try await modelData.generateImage(
                                     forEditImage: image.jpegData(compressionQuality: 0.8),
-                                    url: URL(string: DallEAPI.editImageURL)!,
+                                    url: URL(string: VoiceDraw.editImageURL)!,
                                     with: promptWithSelectedStyle,
                                     quantity: quantitySelected,
                                     style: styleSelected,
@@ -55,7 +54,7 @@ struct BottomView: View {
 
                             } else {
                                 try await modelData.generateImage(
-                                    url: URL(string: DallEAPI.generateURL)!,
+                                    url: URL(string: VoiceDraw.generateURL)!,
                                     with: promptWithSelectedStyle,
                                     quantity: quantitySelected,
                                     style: styleSelected,

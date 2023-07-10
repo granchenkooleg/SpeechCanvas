@@ -1,6 +1,5 @@
 //
 //  UIDevice.swift
-//  DallETutorial
 //
 //  Created by Oleg Granchenko on 29.06.2023.
 //

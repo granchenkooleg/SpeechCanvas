@@ -1,6 +1,5 @@
 //
 //  ImageDetails.swift
-//  DallETutorial
 //
 //  Created by Oleg Granchenko on 04.07.2023.
 //
