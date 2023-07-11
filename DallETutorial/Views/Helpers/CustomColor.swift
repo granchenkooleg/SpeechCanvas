@@ -7,5 +7,6 @@
 import SwiftUI
 
 struct CustomColor {
-    static let mint = Color("mintcolor")
+    static let mint = Color("mint_color")
+    static let lightOrange = Color("light_orange_color")
 }

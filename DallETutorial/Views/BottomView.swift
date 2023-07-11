@@ -23,20 +23,33 @@ struct BottomView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .center) {
-                TextField("Enter prompt", text: $prompt, axis: .vertical)
-                    .placeholder(when: prompt.isEmpty) {
-                        Text("Enter prompt").foregroundColor(.gray)
+            VStack(alignment: .center, spacing: 0) {
+                VStack(spacing: 0) {
+                    TextField("Enter prompt", text: $prompt, axis: .vertical)
+                        .placeholder(when: prompt.isEmpty) {
+                            Text("Enter prompt").foregroundColor(.gray)
+                        }
+                        .lineLimit(5)
+                        .autocorrectionDisabled(true)
+                        .frame(height: 113)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .padding([.horizontal], 16)
+                        .background(colorScheme == .light ? .black : .white)
+                        .foregroundColor(colorScheme == .dark ? .black : .white)
+                        .cornerRadius(16)
+                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                    Button {} label: {
+                        Text("Actions")
+                            .frame(height: 36)
+                            .frame(minWidth: 0, maxWidth: .infinity)
                     }
-                    .lineLimit(5)
-                    .autocorrectionDisabled(true)
-                    .frame(height: 77)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .padding([.horizontal], 16)
-                    .background(colorScheme == .light ? .black : .white)
+                    .padding(.horizontal, 20)
+                    .background(CustomColor.lightOrange)
                     .foregroundColor(colorScheme == .dark ? .black : .white)
-                    .cornerRadius(16)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                    .cornerRadius(12)
+                    .offset(y: -36)
+                }
+
                 HStack {
                     Button("Generate") {
                         modelData.images.removeAll()

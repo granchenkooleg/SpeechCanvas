@@ -38,24 +38,14 @@ struct ImageDetails: View {
                 Spacer()
 
                 if let image = image {
-                    HStack {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 256, height: 256)
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 256, height: 256)
 
-                        let shareImage = Image(uiImage: image)
-                        ShareLink(item: shareImage, preview: SharePreview("", image: shareImage))
-                    }
+                    let shareImage = Image(uiImage: image)
 
-                    Button("Save Image") {
-                        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    }
-                    .frame(width: 190, height: 50)
-                    .background(colorScheme == .dark ? .white : .black)
-                    .foregroundColor(colorScheme == .light ? .white : .black)
-                    .controlSize(.large)
-                    .cornerRadius(12)
+                    ShareLink(item: shareImage, preview: SharePreview("", image: shareImage))
                 }
 
                 Spacer()

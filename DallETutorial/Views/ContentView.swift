@@ -12,6 +12,8 @@ struct ContentView: View {
         NavigationView {
             if UIDevice.isIPad {
                 CollectionContent()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .background(.white)
                 Panel()
             } else {
                 TabView(selection: $selection) {
@@ -20,7 +22,7 @@ struct ContentView: View {
                             Label("Canvas", systemImage: "sprinkler.and.droplets.fill")
                         }
                         .tag(Tab.canvas)
-
+                    
                     CollectionContent()
                         .tabItem {
                             Label("History", systemImage: "list.bullet")
