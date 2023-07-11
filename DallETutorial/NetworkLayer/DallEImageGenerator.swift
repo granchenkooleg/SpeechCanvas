@@ -5,6 +5,7 @@ enum ImageError: Error {
 }
 
 class DallEImageGenerator {
+    let api_key = Secrets.apiKey
     static let shared = DallEImageGenerator()
     let sessionID = UUID().uuidString
     
@@ -35,10 +36,43 @@ class DallEImageGenerator {
         return result.hasIssues == false
     }
 
+//    func generateImage(
+//        from prompt: String,
+//        quantity: String,
+//        size: String
+//    ) async throws -> ImageGenerationResponse {
+//        var request = URLRequest(url: URL(string: VoiceDrawEndpoint.generateURL)!)
+//        request.setValue("Bearer \(api_key)", forHTTPHeaderField: "Authorization")
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpMethod = "POST"
+//
+//        //        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
+//       //        //            throw ImageError.inValidPrompt
+//       //        //        }
+//
+//        let parameters: [String: Any] = [
+//            "prompt": prompt,
+//            "n": quantity,
+//            "size": size
+//        ]
+//
+//        let jsonData = try? JSONSerialization.data(withJSONObject: parameters)
+//
+//        request.httpBody = jsonData
+//
+//        let (response, _) = try await URLSession.shared.data(for: request)
+//        let responseString = String(data: response, encoding: .utf8)
+//
+//        // Handle the response as per your requirement
+//        print("Server response: \(responseString ?? "")")
+//        let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: response)
+//
+//        return result
+//
+//    }
+
     func generateImage(
-        forEditImage imageData: String? = nil,
-        url: URL,
-        withPrompt prompt: String,
+        from prompt: String,
         quantity: String,
         size: String
     ) async throws -> ImageGenerationResponse {
@@ -82,22 +116,29 @@ class DallEImageGenerator {
             }
         }
         
-        if let data = imageData {
-            body.append("--\(boundary)\r\n".data(using: .utf8)!)
-            body.append("filename=\"image.png\"\r\n".data(using: .utf8)!)
-            body.append("Content-Type: \"content-type header\"\r\n\r\n\(data)\r\n".data(using: .utf8)!)
-
+//        if let data = imageData {
 //            body.append("--\(boundary)\r\n".data(using: .utf8)!)
-//            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.png\"\r\n".data(using: .utf8)!)
-//            body.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-//            body.append(data)
-//            body.append("\r\n".data(using: .utf8)!)
-        }
+//            let fileContent = String(data: data, encoding: .utf8)!
+//            body.append("filename=\"image.png\"\r\n".data(using: .utf8)!)
+//            body.append("Content-Type: \"content-type header\"\r\n\r\n\(fileContent)\r\n".data(using: .utf8)!)
+
+//            let paramSrc = param["src"] as! String
+//                let fileData = try NSData(contentsOfFile: paramSrc, options: []) as Data
+//                let fileContent = String(data: fileData, encoding: .utf8)!
+//                body += "; filename=\"\(paramSrc)\"\r\n"
+//                  + "Content-Type: \"content-type header\"\r\n\r\n\(fileContent)\r\n"
+//
+////            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+////            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.png\"\r\n".data(using: .utf8)!)
+////            body.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+////            body.append(data)
+////            body.append("\r\n".data(using: .utf8)!)
+//        }
 
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
-        var request = URLRequest(url: url)
-        request.addValue("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", forHTTPHeaderField: "Authorization")
+        var request = URLRequest(url: URL(string: VoiceDrawEndpoint.generateURL)!)
+        request.addValue(Secrets.apiKey, forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"
@@ -113,53 +154,31 @@ class DallEImageGenerator {
         return result
     }
 
-//    func generateImage(
-//        apiKey: String,
-//        forEditImage imageData: Data? = nil,
-//        url: URL,
-//        withPrompt prompt: String,
-//        quantity: String,
-//        size: String
-//    ) async throws -> ImageGenerationResponse {
-//        let parameters: [String: Any]
+//    func generateEditedImage(from image: UIImage, with mask: UIImage) async throws -> [Photo]  {
 //
-//        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
-//            throw ImageError.inValidPrompt
+//        guard let imageData = image.pngData() else{return []}
+//        guard let maskData = mask.pngData() else{return []}
+//
+//        let formFields: [String: String] = [
+//            "prompt": "A woman wearing a red dress with a laughter face expression",
+//            "size": "256x256"
+//        ]
+//
+//        let multipart = MultipartFormDataRequest(url: OpenAIEndpoint.edits.url)
+//        multipart.addDataField(fieldName:  "image", fileName: "image.png", data: imageData, mimeType: "image/png")
+//        multipart.addDataField(fieldName:  "mask", fileName: "mask.png", data: maskData, mimeType: "image/png")
+//
+//        for (key, value) in formFields {
+//            multipart.addTextField(named: key, value: value)
 //        }
 //
-//        guard let url = URL(string: "https://api.openai.com/v1/images/generations") else {
-//            throw ImageError.badURL
-//        }
+//        var request = multipart.asURLRequest()
+//        request.setValue("Bearer \(api_key_free)", forHTTPHeaderField: "Authorization")
 //
-//        if let imageData = imageData {
-//             parameters = [
-//                    "prompt": prompt,
-//                    "num_completions": 1,
-//                    "top_p": 1.0,
-//                    "n": 1,
-//                    "images": [imageData.base64EncodedString()]
-//                ]
-//        } else {
-//             parameters = [
-//                "prompt" : prompt, // The maximum length is 1000 characters.
-//                "n" : 1, // The number of images to generate. Must be between 1 and 10.
-//                "size" : size, // The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
-//                "user" : sessionID // Sending end-user IDs in your requests can be a useful tool to help OpenAI monitor and detect abuse. Username, email address or session ID
-//            ]
-//        }
+//        let (data, _) = try await URLSession.shared.data(for: request)
+//        let dalleResponse = try? JSONDecoder().decode(DALLEResponse.self, from: data)
 //
+//        return dalleResponse?.data ?? []
 //
-//        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
-//
-//        var request = URLRequest(url: url)
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-//        request.httpMethod = "POST"
-//        request.httpBody = data
-//
-//        let (response, _) = try await URLSession.shared.data(for: request)
-//        let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: response)
-//
-//        return result
 //    }
 }

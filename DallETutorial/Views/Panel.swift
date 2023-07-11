@@ -9,7 +9,6 @@ import SwiftUI
 struct Panel: View {
     @EnvironmentObject var modelData: ModelData
     @State private var showingProfile = false
-    @Environment(\.colorScheme) var colorScheme
     @State private var quantity: String = "1"
     @State private var style: String = "Pixar"
     @State private var size: String = "256x256"

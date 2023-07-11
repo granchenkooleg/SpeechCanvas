@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct VoiceDraw {
+struct VoiceDrawEndpoint {
     static var generateURL: String {
         "http://74.235.97.111/api/generate/"
     }

@@ -13,7 +13,6 @@ struct ImageDetails: View {
     @Binding var size: String
     @State private var isLoading: Bool = false
     @Binding var image: UIImage?
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
 
     var body: some View {

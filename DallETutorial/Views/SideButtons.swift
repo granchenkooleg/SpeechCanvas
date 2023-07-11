@@ -20,7 +20,11 @@ struct SideButtons: View {
                     Text($0)
                 }
             }
-            .background (.ultraThinMaterial, in: RoundedRectangle (cornerRadius: 16.0))
+            .background(.yellow)
+//            .background (.ultraThinMaterial, in: RoundedRectangle (cornerRadius: 16.0))
+            .frame(maxWidth: 50, maxHeight: 50)
+            .cornerRadius(25)
+            .padding(.horizontal, 10)
 
             Picker("", selection: $styleSelection) {
                 ForEach(SideButtonsModel.styles.sorted(by: >), id: \.key) { style in

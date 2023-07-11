@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct CollectionContent: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var selectedImage: UIImage?
     @State private var selectedQuantity: String = ""
     @State private var selectedStyle: String = ""
@@ -31,8 +32,9 @@ struct CollectionContent: View {
                                 Text(history.transcript)
                             }
                             .background(CustomColor.lightOrange)
-                            .cornerRadius(3.0)
-                            .padding()
+                            .foregroundColor(colorScheme == .dark ? .black : .white)
+                            .padding(10)
+                            .cornerRadius(10.0)
 
                             LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
                                 sequenceImagesSideBar(of: history)

@@ -43,16 +43,13 @@ final class ModelData: ObservableObject {
     ) async throws {
         do {
             let response = try await DallEImageGenerator.shared.generateImage(
-                forEditImage: imageData,
-                url: url,
-                withPrompt: prompt,
+                from: prompt,
                 quantity: quantity,
                 size: size
             )
 
             for data in response.data {
                 let (data, _) = try await URLSession.shared.data(from: data.url)
-                //                modelData.imageData = data
                 images.append(UIImage(data: data)!)
             }
 

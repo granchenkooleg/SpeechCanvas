@@ -60,7 +60,7 @@ struct BottomView: View {
                                 let base64Image = pngImage?.base64EncodedString()
                                 try await modelData.generateImage(
                                     forEditImage: base64Image,
-                                    url: URL(string: VoiceDraw.editImageURL)!,
+                                    url: URL(string: VoiceDrawEndpoint.editImageURL)!,
                                     with: promptWithSelectedStyle,
                                     quantity: quantitySelected,
                                     style: styleSelected,
@@ -69,7 +69,7 @@ struct BottomView: View {
 
                             } else {
                                 try await modelData.generateImage(
-                                    url: URL(string: VoiceDraw.generateURL)!,
+                                    url: URL(string: VoiceDrawEndpoint.generateURL)!,
                                     with: promptWithSelectedStyle,
                                     quantity: quantitySelected,
                                     style: styleSelected,
