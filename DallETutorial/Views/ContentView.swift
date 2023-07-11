@@ -12,8 +12,6 @@ struct ContentView: View {
         NavigationView {
             if UIDevice.isIPad {
                 CollectionContent()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                    .background(.white)
                 Panel()
             } else {
                 TabView(selection: $selection) {

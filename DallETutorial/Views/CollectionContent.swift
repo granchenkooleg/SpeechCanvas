@@ -20,34 +20,38 @@ struct CollectionContent: View {
     var gridItemLayoutSideBar = [GridItem(.adaptive(minimum: 50), spacing: 0, alignment: .center)]
 
     var body: some View {
-        if isSideBar {
-            ScrollView(.vertical, showsIndicators: false) {
-                ForEach(modelData.histories) { history in
-                    VStack(alignment: .leading, spacing: 5) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text(history.date, format: .dateTime
-                                .hour().minute().day().month().year())
-                            Text(history.transcript)
-                        }
-                        .background(CustomColor.lightOrange)
-                        .cornerRadius(3.0)
-                        .padding()
+        GeometryReader { geometry in
+            if isSideBar {
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach(modelData.histories) { history in
+                        VStack(alignment: .leading, spacing: 5) {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(history.date, format: .dateTime
+                                    .hour().minute().day().month().year())
+                                Text(history.transcript)
+                            }
+                            .background(CustomColor.lightOrange)
+                            .cornerRadius(3.0)
+                            .padding()
 
-                        LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
-                            sequenceImagesSideBar(of: history)
+                            LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
+                                sequenceImagesSideBar(of: history)
+                            }
                         }
+                        .padding(.bottom, 10)
                     }
-                    .padding(.bottom, 10)
                 }
-            }
-            .padding(.horizontal, 5)
-        } else {
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: gridItemLayoutSideBariPhone) {
-                    sequenceOfImages()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(.white)
+                .padding(.horizontal, 5)
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    LazyVGrid(columns: gridItemLayoutSideBariPhone) {
+                        sequenceOfImages()
+                    }
                 }
+                .padding(.horizontal, 5)
             }
-            .padding(.horizontal, 5)
         }
     }
 
