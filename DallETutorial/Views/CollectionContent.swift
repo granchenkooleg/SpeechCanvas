@@ -29,6 +29,10 @@ struct CollectionContent: View {
                                 .hour().minute().day().month().year())
                             Text(history.transcript)
                         }
+                        .background(CustomColor.lightOrange)
+                        .cornerRadius(3.0)
+                        .padding()
+
                         LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
                             sequenceImagesSideBar(of: history)
                         }
