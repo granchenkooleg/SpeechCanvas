@@ -36,7 +36,7 @@ class DallEImageGenerator {
     }
 
     func generateImage(
-        forEditImage imageData: Data? = nil,
+        forEditImage imageData: String? = nil,
         url: URL,
         withPrompt prompt: String,
         quantity: String,
@@ -84,11 +84,14 @@ class DallEImageGenerator {
         
         if let data = imageData {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
-            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-            body.append(data)
-            body.append("\r\n".data(using: .utf8)!)
-            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            body.append("filename=\"image.png\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: \"content-type header\"\r\n\r\n\(data)\r\n".data(using: .utf8)!)
+
+//            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+//            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.png\"\r\n".data(using: .utf8)!)
+//            body.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+//            body.append(data)
+//            body.append("\r\n".data(using: .utf8)!)
         }
 
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
@@ -101,8 +104,62 @@ class DallEImageGenerator {
         request.httpBody = body as Data
 
         let (response, _) = try await URLSession.shared.data(for: request)
+        let responseString = String(data: response, encoding: .utf8)
+
+        // Handle the response as per your requirement
+        print("Server response: \(responseString ?? "")")
         let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: response)
 
         return result
     }
+
+//    func generateImage(
+//        apiKey: String,
+//        forEditImage imageData: Data? = nil,
+//        url: URL,
+//        withPrompt prompt: String,
+//        quantity: String,
+//        size: String
+//    ) async throws -> ImageGenerationResponse {
+//        let parameters: [String: Any]
+//
+//        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
+//            throw ImageError.inValidPrompt
+//        }
+//
+//        guard let url = URL(string: "https://api.openai.com/v1/images/generations") else {
+//            throw ImageError.badURL
+//        }
+//
+//        if let imageData = imageData {
+//             parameters = [
+//                    "prompt": prompt,
+//                    "num_completions": 1,
+//                    "top_p": 1.0,
+//                    "n": 1,
+//                    "images": [imageData.base64EncodedString()]
+//                ]
+//        } else {
+//             parameters = [
+//                "prompt" : prompt, // The maximum length is 1000 characters.
+//                "n" : 1, // The number of images to generate. Must be between 1 and 10.
+//                "size" : size, // The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
+//                "user" : sessionID // Sending end-user IDs in your requests can be a useful tool to help OpenAI monitor and detect abuse. Username, email address or session ID
+//            ]
+//        }
+//
+//
+//        let data: Data = try JSONSerialization.data(withJSONObject: parameters)
+//
+//        var request = URLRequest(url: url)
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        request.httpMethod = "POST"
+//        request.httpBody = data
+//
+//        let (response, _) = try await URLSession.shared.data(for: request)
+//        let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: response)
+//
+//        return result
+//    }
 }

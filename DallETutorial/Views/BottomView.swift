@@ -43,8 +43,10 @@ struct BottomView: View {
                         isLoading = true
                         Task {
                             if let image = image {
+                                let pngImage = image.pngData()
+                                let base64Image = pngImage?.base64EncodedString()
                                 try await modelData.generateImage(
-                                    forEditImage: image.jpegData(compressionQuality: 0.8),
+                                    forEditImage: base64Image,
                                     url: URL(string: VoiceDraw.editImageURL)!,
                                     with: promptWithSelectedStyle,
                                     quantity: quantitySelected,

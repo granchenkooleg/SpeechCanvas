@@ -8,9 +8,9 @@ import SwiftUI
 
 struct ImageDetails: View {
     private let url = URL(string: "https://www.appcoda.com")!
-    @State private var quantity: String = "1"
-    @State private var style: String = ""
-    @State private var size: String = ""
+    @Binding var quantity: String
+    @Binding var style: String
+    @Binding var size: String
     @State private var isLoading: Bool = false
     @Binding var image: UIImage?
     @Environment(\.colorScheme) var colorScheme

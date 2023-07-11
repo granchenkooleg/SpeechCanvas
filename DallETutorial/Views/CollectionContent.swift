@@ -8,6 +8,9 @@ import SwiftUI
 
 struct CollectionContent: View {
     @State private var selectedImage: UIImage?
+    @State private var selectedQuantity: String = ""
+    @State private var selectedStyle: String = ""
+    @State private var selectedSize: String = ""
     @EnvironmentObject var modelData: ModelData
     var isSideBar: Bool = true
 
@@ -54,11 +57,19 @@ struct CollectionContent: View {
                 .border(.black)
                 .onTapGesture {
                     selectedImage = image
+                    selectedQuantity = history.quantity
+                    selectedStyle = history.style
+                    selectedSize = history.size
                     isPresented = true
                 }
         }
         .fullScreenCover(isPresented: $isPresented) {
-            ImageDetails(image: $selectedImage)
+            ImageDetails(
+                quantity: $selectedQuantity,
+                style: $selectedStyle,
+                size: $selectedSize,
+                image: $selectedImage
+            )
         }
     }
 
@@ -72,11 +83,19 @@ struct CollectionContent: View {
                 .background(.brown)
                 .onTapGesture {
                     selectedImage = image
+                    selectedQuantity = modelData.histories.last?.quantity ?? ""
+                    selectedStyle = modelData.histories.last?.style ?? ""
+                    selectedSize = modelData.histories.last?.size ?? ""
                     isPresented = true
                 }
         }
         .fullScreenCover(isPresented: $isPresented) {
-            ImageDetails(image: $selectedImage)
+            ImageDetails(
+                quantity: $selectedQuantity,
+                style: $selectedStyle,
+                size: $selectedSize,
+                image: $selectedImage
+            )
         }
     }
 }

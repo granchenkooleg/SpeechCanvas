@@ -10,4 +10,7 @@ struct History: Identifiable {
     let date: Date
     var images: [UIImage]
     var transcript: String
+    let quantity: String
+    let style: String
+    let size: String
 }
