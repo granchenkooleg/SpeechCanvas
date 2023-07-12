@@ -25,6 +25,7 @@
 		9E7C3B752A5ECE0100B39F37 /* DropDownSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B742A5ECE0100B39F37 /* DropDownSelector.swift */; };
 		9E7C3B772A5ECE5F00B39F37 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B762A5ECE5F00B39F37 /* DropdownView.swift */; };
 		9E7C3B792A5ECE8100B39F37 /* DropdownRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B782A5ECE8100B39F37 /* DropdownRow.swift */; };
+		9E7C3B7B2A5EDF7E00B39F37 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B7A2A5EDF7E00B39F37 /* Binding.swift */; };
 		9E7F8C752A56D88F00B0DD5C /* VoiceDrawEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F8C742A56D88F00B0DD5C /* VoiceDrawEndpoint.swift */; };
 		9E7F8C792A56E64500B0DD5C /* SideButtonsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F8C782A56E64500B0DD5C /* SideButtonsModel.swift */; };
 		9E8C79FF2A45B50F00A11542 /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C79FC2A45B50F00A11542 /* ProfileEditor.swift */; };
@@ -62,6 +63,7 @@
 		9E7C3B742A5ECE0100B39F37 /* DropDownSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownSelector.swift; sourceTree = "<group>"; };
 		9E7C3B762A5ECE5F00B39F37 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 		9E7C3B782A5ECE8100B39F37 /* DropdownRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownRow.swift; sourceTree = "<group>"; };
+		9E7C3B7A2A5EDF7E00B39F37 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		9E7F8C742A56D88F00B0DD5C /* VoiceDrawEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDrawEndpoint.swift; sourceTree = "<group>"; };
 		9E7F8C782A56E64500B0DD5C /* SideButtonsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideButtonsModel.swift; sourceTree = "<group>"; };
 		9E8C79FC2A45B50F00A11542 /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		9EED78192A4DD0D600525298 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9E7C3B7A2A5EDF7E00B39F37 /* Binding.swift */,
 				9E7540AA2A582CE7005DC479 /* UIApplication.swift */,
 				9EED781A2A4DD0F700525298 /* UIDevice.swift */,
 				9E63C4902A55C6BE0004EBBB /* View.swift */,
@@ -301,6 +304,7 @@
 				9E57FFE92A38F74400C72B32 /* ListenerView.swift in Sources */,
 				9EADB3882A448385006F184E /* FavoriteButton.swift in Sources */,
 				9E57FFE72A38F57800C72B32 /* SpeechRecognizer.swift in Sources */,
+				9E7C3B7B2A5EDF7E00B39F37 /* Binding.swift in Sources */,
 				5C4A9A1E291BAED000D2B2B5 /* ModerationResponse.swift in Sources */,
 				9E8D81FA2A55C7A40027005D /* BottomView.swift in Sources */,
 				9E7C3B772A5ECE5F00B39F37 /* DropdownView.swift in Sources */,

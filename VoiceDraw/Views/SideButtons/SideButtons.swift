@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct SideButtons: View {
+    @State private var shouldShowDropdownQuantity = false
+    @State private var shouldShowDropdownStyle = false
+    @State private var shouldShowDropdownSize = false
     @Binding var quantitySelection: String
     @Binding var styleSelection: String
     @Binding var sizeSelection: String
@@ -15,6 +18,7 @@ struct SideButtons: View {
     var body: some View {
         VStack {
             DropdownSelector(
+                shouldShowDropdown: $shouldShowDropdownQuantity.onChange(stateChanged1),
                 placeholder: "n",
                 options: SideButtonsModel.quantity,
                 onOptionSelected: { quantity in
@@ -23,6 +27,7 @@ struct SideButtons: View {
             .zIndex(2)
 
             DropdownSelector(
+                shouldShowDropdown: $shouldShowDropdownStyle.onChange(stateChanged2),
                 placeholder: "Style",
                 options: SideButtonsModel.styles,
                 onOptionSelected: { style in
@@ -31,6 +36,7 @@ struct SideButtons: View {
             .zIndex(1)
 
             DropdownSelector(
+                shouldShowDropdown:  $shouldShowDropdownSize.onChange(stateChanged3),
                 placeholder: "Size",
                 options: SideButtonsModel.sizes,
                 onOptionSelected: { size in
@@ -40,5 +46,27 @@ struct SideButtons: View {
         .padding(.horizontal)
         .accentColor(colorScheme == .dark ? .white : .black)
         .padding(.horizontal, 8)
+    }
+
+    func stateChanged1(to value: Bool) {
+        if shouldShowDropdownStyle || shouldShowDropdownSize {
+            shouldShowDropdownStyle = false
+            shouldShowDropdownSize = false
+        }
+
+    }
+    
+    func stateChanged2(to value: Bool) {
+        if shouldShowDropdownQuantity || shouldShowDropdownSize {
+            shouldShowDropdownQuantity = false
+            shouldShowDropdownSize = false
+        }
+    }
+
+    func stateChanged3(to value: Bool) {
+        if shouldShowDropdownQuantity || shouldShowDropdownStyle {
+            shouldShowDropdownQuantity = false
+            shouldShowDropdownStyle = false
+        }
     }
 }

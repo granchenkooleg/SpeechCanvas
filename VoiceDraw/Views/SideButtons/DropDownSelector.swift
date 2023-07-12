@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DropdownSelector: View {
-    @State private var shouldShowDropdown = false
+    @Binding var shouldShowDropdown: Bool
     @State private var selectedOption: DropdownOption? = nil
     var placeholder: String
     var options: [DropdownOption]
@@ -16,7 +16,7 @@ struct DropdownSelector: View {
     private let buttonHeight: CGFloat = 44
     var body: some View {
         Button(action: {
-             shouldShowDropdown.toggle()
+            shouldShowDropdown.toggle()
         }) {
             HStack {
                 Text(selectedOption == nil ? placeholder : selectedOption!.value)
@@ -37,17 +37,17 @@ struct DropdownSelector: View {
                 .stroke(Color.gray, lineWidth: 1)
         )
         .overlay(
-                VStack(alignment: .leading) {
-                    if self.shouldShowDropdown {
-                        Spacer(minLength: buttonHeight / 2)
-                        Dropdown(options: self.options, onOptionSelected: { option in
-                            shouldShowDropdown = false
-                            selectedOption = option
-                            onOptionSelected?(option)
-                        })
-                        .offset(x: -65) //
-                    }
-                }, alignment: .top
+            VStack(alignment: .leading) {
+                if shouldShowDropdown {
+                    //                        Spacer(minLength: buttonHeight / 2)
+                    Dropdown(options: self.options, onOptionSelected: { option in
+                        shouldShowDropdown = false
+                        selectedOption = option
+                        onOptionSelected?(option)
+                    })
+                    .offset(x: -90)
+                }
+            }, alignment: .top
         )
         .background(
             RoundedRectangle(cornerRadius: 5).fill(CustomColor.lightGray)
@@ -55,11 +55,14 @@ struct DropdownSelector: View {
     }
 }
 
+
 struct DropdownSelector_Previews: PreviewProvider {
+
     static var previews: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
                 DropdownSelector(
+                    shouldShowDropdown: .constant(false),
                     placeholder: "n",
                     options: SideButtonsModel.quantity,
                     onOptionSelected: { quantity in
@@ -68,6 +71,7 @@ struct DropdownSelector_Previews: PreviewProvider {
                 .zIndex(2)
 
                 DropdownSelector(
+                    shouldShowDropdown: .constant(false),
                     placeholder: "🟠",
                     options: SideButtonsModel.styles,
                     onOptionSelected: { style in
@@ -76,6 +80,7 @@ struct DropdownSelector_Previews: PreviewProvider {
                 .zIndex(1)
 
                 DropdownSelector(
+                    shouldShowDropdown: .constant(true),
                     placeholder: "Size",
                     options: SideButtonsModel.sizes,
                     onOptionSelected: { size in
