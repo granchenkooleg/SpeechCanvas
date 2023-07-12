@@ -12,24 +12,24 @@ import SwiftUI
 final class ModelData: ObservableObject {
     @Published var showingAlert = false
     @Published var images: [UIImage] = [
-//        UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!
+        //        UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!
     ]
     @Published var histories: [History] = [
-//        History(
-//            date: Date.now,
-//            images: [UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!],
-//            transcript: "I am here 1"
-//        ),
-//        History(
-//            date: Date.now + 2,
-//            images: [UIImage(systemName: "cursorarrow.rays")!, UIImage(systemName: "cursorarrow.motionlines")!, UIImage(systemName: "cursorarrow.motionlines.click")!, UIImage(systemName: "dot.circle.and.hand.point.up.left.fill")!, UIImage(systemName: "dot.circle.and.cursorarrow")!, UIImage(systemName: "plus.magnifyingglass")!, UIImage(systemName: "circle.hexagonpath")!, UIImage(systemName: "smallcircle.filled.circle.fill")!, UIImage(systemName: "smallcircle.filled.circle")!, UIImage(systemName: "minus.magnifyingglass")!],
-//            transcript: "I am here 2"
-//        ),
-//        History(
-//            date: Date.now + 4,
-//            images: [UIImage(systemName: "cursorarrow.click.badge.clock")!, UIImage(systemName: "cursorarrow.and.square.on.square.dashed")!, UIImage(systemName: "cursorarrow.click")!],
-//            transcript: "I am here 3"
-//        )
+        //        History(
+        //            date: Date.now,
+        //            images: [UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!],
+        //            transcript: "I am here 1"
+        //        ),
+        //        History(
+        //            date: Date.now + 2,
+        //            images: [UIImage(systemName: "cursorarrow.rays")!, UIImage(systemName: "cursorarrow.motionlines")!, UIImage(systemName: "cursorarrow.motionlines.click")!, UIImage(systemName: "dot.circle.and.hand.point.up.left.fill")!, UIImage(systemName: "dot.circle.and.cursorarrow")!, UIImage(systemName: "plus.magnifyingglass")!, UIImage(systemName: "circle.hexagonpath")!, UIImage(systemName: "smallcircle.filled.circle.fill")!, UIImage(systemName: "smallcircle.filled.circle")!, UIImage(systemName: "minus.magnifyingglass")!],
+        //            transcript: "I am here 2"
+        //        ),
+        //        History(
+        //            date: Date.now + 4,
+        //            images: [UIImage(systemName: "cursorarrow.click.badge.clock")!, UIImage(systemName: "cursorarrow.and.square.on.square.dashed")!, UIImage(systemName: "cursorarrow.click")!],
+        //            transcript: "I am here 3"
+        //        )
     ]
     @Published var profile = Profile.default
 
@@ -66,7 +66,7 @@ final class ModelData: ObservableObject {
                 )
             )
         } catch {
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.showingAlert = true
             }
             print("⚠️⚠️⚠️ \(error.localizedDescription)")
