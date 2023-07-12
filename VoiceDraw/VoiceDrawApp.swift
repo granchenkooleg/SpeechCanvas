@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct DallETutorialApp: App {
+struct VoiceDrawApp: App {
     @StateObject private var modelData = ModelData()
     
     var body: some Scene {

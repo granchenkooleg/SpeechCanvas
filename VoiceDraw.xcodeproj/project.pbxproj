@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C4A9A0E291BAAD700D2B2B5 /* DallETutorialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A9A0D291BAAD700D2B2B5 /* DallETutorialApp.swift */; };
+		5C4A9A0E291BAAD700D2B2B5 /* VoiceDrawApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A9A0D291BAAD700D2B2B5 /* VoiceDrawApp.swift */; };
 		5C4A9A10291BAAD700D2B2B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */; };
 		5C4A9A12291BAAD700D2B2B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */; };
 		5C4A9A15291BAAD700D2B2B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A9A14291BAAD700D2B2B5 /* Preview Assets.xcassets */; };
@@ -41,8 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5C4A9A0A291BAAD700D2B2B5 /* DallETutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DallETutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C4A9A0D291BAAD700D2B2B5 /* DallETutorialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DallETutorialApp.swift; sourceTree = "<group>"; };
+		5C4A9A0A291BAAD700D2B2B5 /* VoiceDraw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceDraw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C4A9A0D291BAAD700D2B2B5 /* VoiceDrawApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDrawApp.swift; sourceTree = "<group>"; };
 		5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C4A9A14291BAAD700D2B2B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		5C4A9A01291BAAD700D2B2B5 = {
 			isa = PBXGroup;
 			children = (
-				5C4A9A0C291BAAD700D2B2B5 /* DallETutorial */,
+				5C4A9A0C291BAAD700D2B2B5 /* VoiceDraw */,
 				5C4A9A0B291BAAD700D2B2B5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,16 +98,16 @@
 		5C4A9A0B291BAAD700D2B2B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5C4A9A0A291BAAD700D2B2B5 /* DallETutorial.app */,
+				5C4A9A0A291BAAD700D2B2B5 /* VoiceDraw.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5C4A9A0C291BAAD700D2B2B5 /* DallETutorial */ = {
+		5C4A9A0C291BAAD700D2B2B5 /* VoiceDraw */ = {
 			isa = PBXGroup;
 			children = (
 				9EED780E2A4A1B5C00525298 /* Info.plist */,
-				5C4A9A0D291BAAD700D2B2B5 /* DallETutorialApp.swift */,
+				5C4A9A0D291BAAD700D2B2B5 /* VoiceDrawApp.swift */,
 				9E9768C52A3738F70005D51E /* Models */,
 				9E9768C62A37397A0005D51E /* Views */,
 				5C4A9A21291BB10A00D2B2B5 /* Secret.swift */,
@@ -117,7 +117,7 @@
 				5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */,
 				5C4A9A13291BAAD700D2B2B5 /* Preview Content */,
 			);
-			path = DallETutorial;
+			path = VoiceDraw;
 			sourceTree = "<group>";
 		};
 		5C4A9A13291BAAD700D2B2B5 /* Preview Content */ = {
@@ -217,9 +217,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5C4A9A09291BAAD700D2B2B5 /* DallETutorial */ = {
+		5C4A9A09291BAAD700D2B2B5 /* VoiceDraw */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "DallETutorial" */;
+			buildConfigurationList = 5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "VoiceDraw" */;
 			buildPhases = (
 				5C4A9A06291BAAD700D2B2B5 /* Sources */,
 				5C4A9A07291BAAD700D2B2B5 /* Frameworks */,
@@ -229,9 +229,9 @@
 			);
 			dependencies = (
 			);
-			name = DallETutorial;
+			name = VoiceDraw;
 			productName = DallETutorial;
-			productReference = 5C4A9A0A291BAAD700D2B2B5 /* DallETutorial.app */;
+			productReference = 5C4A9A0A291BAAD700D2B2B5 /* VoiceDraw.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -249,7 +249,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "DallETutorial" */;
+			buildConfigurationList = 5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "VoiceDraw" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -262,7 +262,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5C4A9A09291BAAD700D2B2B5 /* DallETutorial */,
+				5C4A9A09291BAAD700D2B2B5 /* VoiceDraw */,
 			);
 		};
 /* End PBXProject section */
@@ -305,7 +305,7 @@
 				5C4A9A1C291BAD9A00D2B2B5 /* DallEImageGenerator.swift in Sources */,
 				5C4A9A10291BAAD700D2B2B5 /* ContentView.swift in Sources */,
 				9EED781B2A4DD0F700525298 /* UIDevice.swift in Sources */,
-				5C4A9A0E291BAAD700D2B2B5 /* DallETutorialApp.swift in Sources */,
+				5C4A9A0E291BAAD700D2B2B5 /* VoiceDrawApp.swift in Sources */,
 				9E5B3C7E2A547E71009ED922 /* ImageDetails.swift in Sources */,
 				9E7540AB2A582CE7005DC479 /* UIApplication.swift in Sources */,
 				9E8D81F82A55C7840027005D /* SideButtons.swift in Sources */,
@@ -440,11 +440,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DallETutorial/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"VoiceDraw/Preview Content\"";
 				DEVELOPMENT_TEAM = BKAQCZMCHY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DallETutorial/Info.plist;
+				INFOPLIST_FILE = VoiceDraw/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio is recorded to transcribe the meeting. Audio recordings are discarded after transcription.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Needed to save your generated images";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
@@ -473,11 +473,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DallETutorial/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"VoiceDraw/Preview Content\"";
 				DEVELOPMENT_TEAM = BKAQCZMCHY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DallETutorial/Info.plist;
+				INFOPLIST_FILE = VoiceDraw/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio is recorded to transcribe the meeting. Audio recordings are discarded after transcription.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Needed to save your generated images";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
@@ -502,7 +502,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "DallETutorial" */ = {
+		5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "VoiceDraw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5C4A9A16291BAAD700D2B2B5 /* Debug */,
@@ -511,7 +511,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "DallETutorial" */ = {
+		5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "VoiceDraw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5C4A9A19291BAAD700D2B2B5 /* Debug */,

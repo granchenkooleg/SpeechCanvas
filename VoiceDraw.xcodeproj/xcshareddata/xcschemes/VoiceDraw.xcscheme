@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5C4A9A09291BAAD700D2B2B5"
-               BuildableName = "DallETutorial.app"
-               BlueprintName = "DallETutorial"
-               ReferencedContainer = "container:DallETutorial.xcodeproj">
+               BuildableName = "VoiceDraw.app"
+               BlueprintName = "VoiceDraw"
+               ReferencedContainer = "container:VoiceDraw.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5C4A9A09291BAAD700D2B2B5"
-            BuildableName = "DallETutorial.app"
-            BlueprintName = "DallETutorial"
-            ReferencedContainer = "container:DallETutorial.xcodeproj">
+            BuildableName = "VoiceDraw.app"
+            BlueprintName = "VoiceDraw"
+            ReferencedContainer = "container:VoiceDraw.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5C4A9A09291BAAD700D2B2B5"
-            BuildableName = "DallETutorial.app"
-            BlueprintName = "DallETutorial"
-            ReferencedContainer = "container:DallETutorial.xcodeproj">
+            BuildableName = "VoiceDraw.app"
+            BlueprintName = "VoiceDraw"
+            ReferencedContainer = "container:VoiceDraw.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
