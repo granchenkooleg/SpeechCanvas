@@ -17,7 +17,7 @@ struct ImageDetails: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Color(uiColor: .clear)//colorScheme == .light ? .white : .black)
+            Color(uiColor: .clear)
                 .overlay(alignment: .topTrailing) {
 
                     Button {

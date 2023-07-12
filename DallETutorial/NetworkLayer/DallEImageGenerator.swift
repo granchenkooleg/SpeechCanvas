@@ -36,42 +36,9 @@ class DallEImageGenerator {
         return result.hasIssues == false
     }
 
-//    func generateImage(
-//        from prompt: String,
-//        quantity: String,
-//        size: String
-//    ) async throws -> ImageGenerationResponse {
-//        var request = URLRequest(url: URL(string: VoiceDrawEndpoint.generateURL)!)
-//        request.setValue("Bearer \(api_key)", forHTTPHeaderField: "Authorization")
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.httpMethod = "POST"
-//
-//        //        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
-//       //        //            throw ImageError.inValidPrompt
-//       //        //        }
-//
-//        let parameters: [String: Any] = [
-//            "prompt": prompt,
-//            "n": quantity,
-//            "size": size
-//        ]
-//
-//        let jsonData = try? JSONSerialization.data(withJSONObject: parameters)
-//
-//        request.httpBody = jsonData
-//
-//        let (response, _) = try await URLSession.shared.data(for: request)
-//        let responseString = String(data: response, encoding: .utf8)
-//
-//        // Handle the response as per your requirement
-//        print("Server response: \(responseString ?? "")")
-//        let result = try JSONDecoder().decode(ImageGenerationResponse.self, from: response)
-//
-//        return result
-//
-//    }
-
     func generateImage(
+        for imageData: Data? = nil,
+        url: URL,
         from prompt: String,
         quantity: String,
         size: String
@@ -96,7 +63,13 @@ class DallEImageGenerator {
                 "key": "size",
                 "value": size,
                 "type": "text"
-            ]] as [[String: Any]]
+            ],
+            [
+                "key": "transparent_squares",
+                "value": "2,3,6,7,10,11,14,15",
+                "type": "text"
+            ]
+        ] as [[String: Any]]
 
         let boundary = "Boundary-\(UUID().uuidString)"
         let body = NSMutableData()
@@ -116,28 +89,18 @@ class DallEImageGenerator {
             }
         }
         
-//        if let data = imageData {
-//            body.append("--\(boundary)\r\n".data(using: .utf8)!)
-//            let fileContent = String(data: data, encoding: .utf8)!
-//            body.append("filename=\"image.png\"\r\n".data(using: .utf8)!)
-//            body.append("Content-Type: \"content-type header\"\r\n\r\n\(fileContent)\r\n".data(using: .utf8)!)
-
-//            let paramSrc = param["src"] as! String
-//                let fileData = try NSData(contentsOfFile: paramSrc, options: []) as Data
-//                let fileContent = String(data: fileData, encoding: .utf8)!
-//                body += "; filename=\"\(paramSrc)\"\r\n"
-//                  + "Content-Type: \"content-type header\"\r\n\r\n\(fileContent)\r\n"
-//
-////            body.append("--\(boundary)\r\n".data(using: .utf8)!)
-////            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.png\"\r\n".data(using: .utf8)!)
-////            body.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-////            body.append(data)
-////            body.append("\r\n".data(using: .utf8)!)
-//        }
+        if let data = imageData {
+            let fileName = Helper.randomString(length: 5) + "image.png"
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+            body.append(data)
+            body.append("\r\n".data(using: .utf8)!)
+        }
 
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
-        var request = URLRequest(url: URL(string: VoiceDrawEndpoint.generateURL)!)
+        var request = URLRequest(url: url)
         request.addValue(Secrets.apiKey, forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
@@ -153,32 +116,4 @@ class DallEImageGenerator {
 
         return result
     }
-
-//    func generateEditedImage(from image: UIImage, with mask: UIImage) async throws -> [Photo]  {
-//
-//        guard let imageData = image.pngData() else{return []}
-//        guard let maskData = mask.pngData() else{return []}
-//
-//        let formFields: [String: String] = [
-//            "prompt": "A woman wearing a red dress with a laughter face expression",
-//            "size": "256x256"
-//        ]
-//
-//        let multipart = MultipartFormDataRequest(url: OpenAIEndpoint.edits.url)
-//        multipart.addDataField(fieldName:  "image", fileName: "image.png", data: imageData, mimeType: "image/png")
-//        multipart.addDataField(fieldName:  "mask", fileName: "mask.png", data: maskData, mimeType: "image/png")
-//
-//        for (key, value) in formFields {
-//            multipart.addTextField(named: key, value: value)
-//        }
-//
-//        var request = multipart.asURLRequest()
-//        request.setValue("Bearer \(api_key_free)", forHTTPHeaderField: "Authorization")
-//
-//        let (data, _) = try await URLSession.shared.data(for: request)
-//        let dalleResponse = try? JSONDecoder().decode(DALLEResponse.self, from: data)
-//
-//        return dalleResponse?.data ?? []
-//
-//    }
 }
