@@ -22,6 +22,9 @@
 		9E601A362A39D45D003AD631 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E601A352A39D45D003AD631 /* History.swift */; };
 		9E63C4912A55C6BE0004EBBB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E63C4902A55C6BE0004EBBB /* View.swift */; };
 		9E7540AB2A582CE7005DC479 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7540AA2A582CE7005DC479 /* UIApplication.swift */; };
+		9E7C3B752A5ECE0100B39F37 /* DropDownSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B742A5ECE0100B39F37 /* DropDownSelector.swift */; };
+		9E7C3B772A5ECE5F00B39F37 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B762A5ECE5F00B39F37 /* DropdownView.swift */; };
+		9E7C3B792A5ECE8100B39F37 /* DropdownRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C3B782A5ECE8100B39F37 /* DropdownRow.swift */; };
 		9E7F8C752A56D88F00B0DD5C /* VoiceDrawEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F8C742A56D88F00B0DD5C /* VoiceDrawEndpoint.swift */; };
 		9E7F8C792A56E64500B0DD5C /* SideButtonsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F8C782A56E64500B0DD5C /* SideButtonsModel.swift */; };
 		9E8C79FF2A45B50F00A11542 /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C79FC2A45B50F00A11542 /* ProfileEditor.swift */; };
@@ -56,6 +59,9 @@
 		9E601A352A39D45D003AD631 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		9E63C4902A55C6BE0004EBBB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		9E7540AA2A582CE7005DC479 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		9E7C3B742A5ECE0100B39F37 /* DropDownSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownSelector.swift; sourceTree = "<group>"; };
+		9E7C3B762A5ECE5F00B39F37 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
+		9E7C3B782A5ECE8100B39F37 /* DropdownRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownRow.swift; sourceTree = "<group>"; };
 		9E7F8C742A56D88F00B0DD5C /* VoiceDrawEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDrawEndpoint.swift; sourceTree = "<group>"; };
 		9E7F8C782A56E64500B0DD5C /* SideButtonsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideButtonsModel.swift; sourceTree = "<group>"; };
 		9E8C79FC2A45B50F00A11542 /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
@@ -126,6 +132,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		9E7C3B732A5ECDBD00B39F37 /* SideButtons */ = {
+			isa = PBXGroup;
+			children = (
+				9E8D81F72A55C7840027005D /* SideButtons.swift */,
+				9E7C3B742A5ECE0100B39F37 /* DropDownSelector.swift */,
+				9E7C3B762A5ECE5F00B39F37 /* DropdownView.swift */,
+				9E7C3B782A5ECE8100B39F37 /* DropdownRow.swift */,
+			);
+			path = SideButtons;
+			sourceTree = "<group>";
+		};
 		9E8C79FB2A45B4EC00A11542 /* Profiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,16 +170,16 @@
 		9E9768C62A37397A0005D51E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9EED78142A4D978900525298 /* SideBar */,
-				9E8C79FB2A45B4EC00A11542 /* Profiles */,
-				9EADB3862A448358006F184E /* Helpers */,
-				9E57FFE82A38F74400C72B32 /* ListenerView.swift */,
-				5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */,
-				9EED780B2A4A17E000525298 /* Panel.swift */,
-				9E5B3C7D2A547E71009ED922 /* ImageDetails.swift */,
-				9E8D81F72A55C7840027005D /* SideButtons.swift */,
 				9E8D81F92A55C7A40027005D /* BottomView.swift */,
 				9E8D81FB2A55C7C50027005D /* CollectionContent.swift */,
+				5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */,
+				9EADB3862A448358006F184E /* Helpers */,
+				9E5B3C7D2A547E71009ED922 /* ImageDetails.swift */,
+				9E57FFE82A38F74400C72B32 /* ListenerView.swift */,
+				9EED780B2A4A17E000525298 /* Panel.swift */,
+				9E8C79FB2A45B4EC00A11542 /* Profiles */,
+				9EED78142A4D978900525298 /* SideBar */,
+				9E7C3B732A5ECDBD00B39F37 /* SideButtons */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,6 +303,7 @@
 				9E57FFE72A38F57800C72B32 /* SpeechRecognizer.swift in Sources */,
 				5C4A9A1E291BAED000D2B2B5 /* ModerationResponse.swift in Sources */,
 				9E8D81FA2A55C7A40027005D /* BottomView.swift in Sources */,
+				9E7C3B772A5ECE5F00B39F37 /* DropdownView.swift in Sources */,
 				9E7F8C792A56E64500B0DD5C /* SideButtonsModel.swift in Sources */,
 				9E8D81FC2A55C7C50027005D /* CollectionContent.swift in Sources */,
 				5C4A9A22291BB10A00D2B2B5 /* Secret.swift in Sources */,
@@ -299,7 +317,9 @@
 				9EED780C2A4A17E000525298 /* Panel.swift in Sources */,
 				9E63C4912A55C6BE0004EBBB /* View.swift in Sources */,
 				5C4A9A1C291BAD9A00D2B2B5 /* DallEImageGenerator.swift in Sources */,
+				9E7C3B752A5ECE0100B39F37 /* DropDownSelector.swift in Sources */,
 				5C4A9A10291BAAD700D2B2B5 /* ContentView.swift in Sources */,
+				9E7C3B792A5ECE8100B39F37 /* DropdownRow.swift in Sources */,
 				9EED781B2A4DD0F700525298 /* UIDevice.swift in Sources */,
 				5C4A9A0E291BAAD700D2B2B5 /* VoiceDrawApp.swift in Sources */,
 				9E5B3C7E2A547E71009ED922 /* ImageDetails.swift in Sources */,
