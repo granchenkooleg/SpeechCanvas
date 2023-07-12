@@ -52,8 +52,10 @@ struct BottomView: View {
 
                 HStack {
                     Button("Generate") {
-                        modelData.images.removeAll()
                         isLoading = true
+                        prompt = ""
+                        modelData.images.removeAll()
+                        dismiss()
                         Task {
                             if let image = image {
                                 try await modelData.generateImage(
@@ -64,7 +66,7 @@ struct BottomView: View {
                                     style: styleSelected,
                                     size: sizeSelected
                                 )
-
+                                isLoading = false
                             } else {
                                 try await modelData.generateImage(
                                     url: URL(string: VoiceDrawEndpoint.generateURL)!,
@@ -73,10 +75,8 @@ struct BottomView: View {
                                     style: styleSelected,
                                     size: sizeSelected
                                 )
+                                isLoading = false
                             }
-                            isLoading = false
-                            prompt = ""
-                            dismiss()
                         }
                     }
                     .disabled(prompt.isEmpty)
