@@ -22,7 +22,7 @@ struct SideButtons: View {
                 placeholder: "n",
                 options: SideButtonsModel.quantity,
                 onOptionSelected: { quantity in
-                    print(quantity)
+                    quantitySelection = quantity.value
                 })
             .zIndex(2)
 
@@ -31,7 +31,7 @@ struct SideButtons: View {
                 placeholder: "Style",
                 options: SideButtonsModel.styles,
                 onOptionSelected: { style in
-                    print(style)
+                    styleSelection = style.value
                 })
             .zIndex(1)
 
@@ -40,7 +40,7 @@ struct SideButtons: View {
                 placeholder: "Size",
                 options: SideButtonsModel.sizes,
                 onOptionSelected: { size in
-                    print(size)
+                    sizeSelection = size.value
                 })
         }
         .padding(.horizontal)
@@ -55,7 +55,7 @@ struct SideButtons: View {
         }
 
     }
-    
+
     func stateChanged2(to value: Bool) {
         if shouldShowDropdownQuantity || shouldShowDropdownSize {
             shouldShowDropdownQuantity = false
