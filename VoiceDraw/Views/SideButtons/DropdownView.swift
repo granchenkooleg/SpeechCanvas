@@ -20,7 +20,7 @@ struct Dropdown: View {
                 }
             }
             .frame(width: 130)
-            .frame(minHeight: CGFloat(options.count) * 30, maxHeight: .infinity)
+            .frame(minHeight: min(CGFloat(options.count) * 52, UIScreen.main.bounds.height / 3))
             .padding(.vertical, 5)
             .background(CustomColor.lightGray)
             .cornerRadius(5)

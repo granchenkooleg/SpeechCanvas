@@ -156,13 +156,13 @@
 		9E9768C52A3738F70005D51E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9E8C7A032A45B59800A11542 /* Profile.swift */,
-				9EADB3742A4480AD006F184E /* ModelData.swift */,
 				9E601A352A39D45D003AD631 /* History.swift */,
-				5C4A9A1D291BAED000D2B2B5 /* ModerationResponse.swift */,
 				5C4A9A1F291BAF9900D2B2B5 /* ImageGenerationResponse.swift */,
-				9E57FFE62A38F57800C72B32 /* SpeechRecognizer.swift */,
+				9EADB3742A4480AD006F184E /* ModelData.swift */,
+				5C4A9A1D291BAED000D2B2B5 /* ModerationResponse.swift */,
+				9E8C7A032A45B59800A11542 /* Profile.swift */,
 				9E7F8C782A56E64500B0DD5C /* SideButtonsModel.swift */,
+				9E57FFE62A38F57800C72B32 /* SpeechRecognizer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,8 +196,8 @@
 		9EADB3862A448358006F184E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9EADB3872A448385006F184E /* FavoriteButton.swift */,
 				9EED78172A4DB09000525298 /* CustomColor.swift */,
+				9EADB3872A448385006F184E /* FavoriteButton.swift */,
 				9E5267262A5DC021009A6015 /* Helper.swift */,
 			);
 			path = Helpers;
@@ -221,9 +221,9 @@
 		9EED78192A4DD0D600525298 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9E7540AA2A582CE7005DC479 /* UIApplication.swift */,
 				9EED781A2A4DD0F700525298 /* UIDevice.swift */,
 				9E63C4902A55C6BE0004EBBB /* View.swift */,
-				9E7540AA2A582CE7005DC479 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
