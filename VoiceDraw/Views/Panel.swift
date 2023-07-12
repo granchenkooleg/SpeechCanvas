@@ -15,7 +15,7 @@ struct Panel: View {
     @State private var isLoading: Bool = false
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .trailing) {
             VStack {
                 if !modelData.images.isEmpty, !isLoading {
                     CollectionContent(
