@@ -24,7 +24,8 @@ struct DropdownSelector: View {
                     .scaledToFit()
                     .minimumScaleFactor(0.01)
                     .lineLimit(1)
-                    .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
+                    .foregroundColor(.black)
+//                    .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
                     .padding(.horizontal, 3)
             }
             .frame(width: 44)

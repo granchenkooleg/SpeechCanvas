@@ -31,16 +31,16 @@ struct CollectionContent: View {
                                     .hour().minute().day().month().year())
                                 Text(history.transcript)
                             }
-                            .background(CustomColor.lightOrange)
-                            .foregroundColor(colorScheme == .dark ? .black : .white)
                             .padding(10)
-                            .cornerRadius(10.0)
+                            .background(CustomColor.lightOrange)
+                            .cornerRadius(4)
+                            .foregroundColor(colorScheme == .dark ? .black : .white)
 
                             LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
                                 sequenceImagesSideBar(of: history)
                             }
                         }
-                        .padding(.bottom, 10)
+                        .padding([.leading, .bottom, .trailing], 10)
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
@@ -99,6 +99,7 @@ struct CollectionContent: View {
                     isPresented = true
                 }
         }
+        .padding(.bottom, 20)
         .fullScreenCover(isPresented: $isPresented) {
             ImageDetails(
                 quantity: $selectedQuantity,

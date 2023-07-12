@@ -16,7 +16,7 @@ struct ImageDetails: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .trailing) {
             Color(uiColor: .clear)
                 .overlay(alignment: .topTrailing) {
 
