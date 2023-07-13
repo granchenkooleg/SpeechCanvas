@@ -11,7 +11,6 @@ struct ImageDetails: View {
     @Binding var quantity: String
     @Binding var style: String
     @Binding var size: String
-    @Binding var isLoading: Bool
     @Binding var image: UIImage?
     @Environment(\.dismiss) var dismiss
 
@@ -53,8 +52,7 @@ struct ImageDetails: View {
                     image: image,
                     quantitySelected: $quantity,
                     styleSelected: $style,
-                    sizeSelected: $size,
-                    isLoading: $isLoading
+                    sizeSelected: $size
                 )
                 .offset(y: -20)
             }

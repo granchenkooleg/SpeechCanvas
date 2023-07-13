@@ -37,6 +37,7 @@ struct SideButtonsModel {
         DropdownOption(key: uniqueKey, value: "1024x1024"),
     ]
     static let styles: [DropdownOption] = [
+        DropdownOption(key: uniqueKey, value: ""),
         DropdownOption(key: "figure.american.football", value: "Pixar"),
         DropdownOption(key: "figure.archery", value: "Ukiyo-e print"),
         DropdownOption(key: uniqueKey, value: "Minimalism"),

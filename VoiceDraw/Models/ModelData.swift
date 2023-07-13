@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 
 final class ModelData: ObservableObject {
+    @Published var isLoading = false
     @Published var showingAlert = false
     @Published var images: [UIImage] = [
 //                UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!, UIImage(systemName: "cursorarrow.motionlines.click")!
@@ -42,6 +43,8 @@ final class ModelData: ObservableObject {
         size: String
     ) async throws {
         do {
+            images.removeAll()
+            isLoading = true
             let response = try await DallEImageGenerator.shared.generateImage(
                 for: imageData,
                 url: url,
@@ -65,6 +68,7 @@ final class ModelData: ObservableObject {
                     size: size
                 )
             )
+            isLoading = false
         } catch {
             await MainActor.run {
                 self.showingAlert = true

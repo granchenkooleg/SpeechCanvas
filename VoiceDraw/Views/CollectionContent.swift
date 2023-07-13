@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct CollectionContent: View {
-    @State var isLoading: Bool = false
     @Environment(\.colorScheme) var colorScheme
     @State private var selectedImage: UIImage?
     @State private var selectedQuantity: String = ""
@@ -52,7 +51,6 @@ struct CollectionContent: View {
                         quantity: $selectedQuantity,
                         style: $selectedStyle,
                         size: $selectedSize,
-                        isLoading: $isLoading,
                         image: $selectedImage
                     )
                 }
@@ -68,7 +66,6 @@ struct CollectionContent: View {
                         quantity: $selectedQuantity,
                         style: $selectedStyle,
                         size: $selectedSize,
-                        isLoading: $isLoading,
                         image: $selectedImage
                     )
                 }

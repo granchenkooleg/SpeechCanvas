@@ -12,12 +12,11 @@ struct Panel: View {
     @State private var quantity: String = "1"
     @State private var style: String = "Pixar"
     @State private var size: String = "256x256"
-    @State private var isLoading: Bool = false
 
     var body: some View {
         ZStack(alignment: .trailing) {
             VStack {
-                if !modelData.images.isEmpty, !isLoading {
+                if !modelData.images.isEmpty, !modelData.isLoading {
                     CollectionContent(
                         isSideBar: false
                     )
@@ -25,7 +24,7 @@ struct Panel: View {
                     Rectangle()
                         .fill(.clear)
                         .overlay {
-                            if isLoading {
+                            if modelData.isLoading {
                                 VStack {
                                     ProgressView()
                                     Text("Loading...")
@@ -38,8 +37,7 @@ struct Panel: View {
                 BottomView(
                     quantitySelected: $quantity,
                     styleSelected: $style,
-                    sizeSelected: $size,
-                    isLoading: $isLoading
+                    sizeSelected: $size
                 )
             }
             .padding()

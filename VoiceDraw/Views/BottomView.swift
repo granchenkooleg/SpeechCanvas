@@ -15,10 +15,13 @@ struct BottomView: View {
     @Binding var sizeSelected: String
     @EnvironmentObject var modelData: ModelData
     @Environment(\.colorScheme) var colorScheme
-    @Binding var isLoading: Bool
 
     private var promptWithSelectedStyle: String {
-        prompt + ", with \(styleSelected) style."
+        if styleSelected.isEmpty {
+            prompt
+        } else {
+            prompt + ", with \(styleSelected) style."
+        }
     }
 
     var body: some View {
@@ -52,9 +55,7 @@ struct BottomView: View {
 
                 HStack {
                     Button("Generate") {
-                        modelData.images.removeAll()
                         dismiss()
-                        isLoading = true
                         Task {
                             if let image = image {
                                 try await modelData.generateImage(
@@ -76,7 +77,6 @@ struct BottomView: View {
                                 )
                             }
                             prompt = ""
-                            isLoading = false
                         }
                     }
                     .disabled(prompt.isEmpty)
