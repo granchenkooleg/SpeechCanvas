@@ -19,13 +19,12 @@ struct DropdownSelector: View {
             shouldShowDropdown.toggle()
         }) {
             HStack {
-                Text(selectedOption == nil ? placeholder : selectedOption!.value)
+                Text(selectedOption == nil ? placeholder : selectedOption!.key)
                     .font(.callout)
                     .scaledToFit()
                     .minimumScaleFactor(0.01)
                     .lineLimit(1)
                     .foregroundColor(.black)
-//                    .foregroundColor(selectedOption == nil ? Color.gray: Color.black)
                     .padding(.horizontal, 3)
             }
             .frame(width: 44)

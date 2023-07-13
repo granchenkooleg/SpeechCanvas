@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DropdownRow: View {
+    let tempKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "256x256", "512x512", "1024x1024"]
     var option: DropdownOption
     var onOptionSelected: ((_ option: DropdownOption) -> Void)?
     var body: some View {
@@ -16,15 +17,21 @@ struct DropdownRow: View {
                 onOptionSelected(self.option)
             }
         }) {
-                HStack {
-                    Text(self.option.value)
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.black)
+            HStack {
+                // FIXME:
+                if tempKeys.contains(option.key) {
+                    Text(option.value)
+                } else {
+                    Text(option.value)
+                    Spacer()
+                    Text(option.key)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 44)
+            }
+            .font(.system(size: 14))
+            .foregroundColor(Color.black)
+            .frame(maxWidth: .infinity)
+            .frame(height: 44)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 5)
+        .padding(5)
     }
 }

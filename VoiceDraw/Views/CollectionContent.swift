@@ -24,11 +24,13 @@ struct CollectionContent: View {
         GeometryReader { geometry in
             if isSideBar {
                 VStack(spacing: 0) {
-                    HStack {
-                        Spacer()
-                        Text("Recent")
-                            .foregroundColor(colorScheme == .dark ? .black : .white)
-                        Spacer()
+                    ZStack(alignment: .trailing) {
+                        HStack {
+                            Text("Recent")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .foregroundColor(colorScheme == .dark ? .black : .white)
+                        }
+
                         Button("Clear") {
                             modelData.histories.removeAll()
                         }
@@ -47,7 +49,8 @@ struct CollectionContent: View {
                                         .hour().minute().day().month().year())
                                     Text(history.transcript)
                                 }
-                                .padding(10)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
                                 .background(CustomColor.lightOrange)
                                 .cornerRadius(4)
                                 .foregroundColor(colorScheme == .dark ? .black : .white)
@@ -56,8 +59,7 @@ struct CollectionContent: View {
                                     sequenceImagesSideBar(of: history)
                                 }
                             }
-                            .padding([.leading, .bottom, .trailing], 10)
-                        }
+                        }.padding()
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .background(colorScheme == .dark ? .white: .black)
@@ -97,7 +99,9 @@ struct CollectionContent: View {
                 .resizable()
                 .scaledToFit()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                .border(.black)
+                .cornerRadius(8)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(.black))
+                .padding(3)
                 .onTapGesture {
                     selectedImage = image
                     selectedQuantity = history.quantity
@@ -113,7 +117,9 @@ struct CollectionContent: View {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 256, height: 256)
+//                .frame(width: 256, height: 256)
+                .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12).stroke(.black))
                 .onTapGesture {
                     selectedImage = image
                     selectedQuantity = modelData.histories.last?.quantity ?? ""
