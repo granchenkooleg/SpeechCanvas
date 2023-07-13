@@ -53,6 +53,7 @@ struct BottomView: View {
                 HStack {
                     Button("Generate") {
                         modelData.images.removeAll()
+                        dismiss()
                         isLoading = true
                         Task {
                             if let image = image {
@@ -74,9 +75,8 @@ struct BottomView: View {
                                     size: sizeSelected
                                 )
                             }
-                            isLoading = false
                             prompt = ""
-                            dismiss()
+                            isLoading = false
                         }
                     }
                     .disabled(prompt.isEmpty)

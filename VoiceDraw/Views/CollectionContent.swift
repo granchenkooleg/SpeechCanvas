@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct CollectionContent: View {
+    @State var isLoading: Bool = false
     @Environment(\.colorScheme) var colorScheme
     @State private var selectedImage: UIImage?
     @State private var selectedQuantity: String = ""
@@ -46,6 +47,15 @@ struct CollectionContent: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(.white)
                 .padding(.horizontal, 5)
+                .fullScreenCover(isPresented: $isPresented) {
+                    ImageDetails(
+                        quantity: $selectedQuantity,
+                        style: $selectedStyle,
+                        size: $selectedSize,
+                        isLoading: $isLoading,
+                        image: $selectedImage
+                    )
+                }
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: gridItemLayoutSideBariPhone) {
@@ -53,6 +63,15 @@ struct CollectionContent: View {
                     }
                 }
                 .padding(.horizontal, 5)
+                .fullScreenCover(isPresented: $isPresented) {
+                    ImageDetails(
+                        quantity: $selectedQuantity,
+                        style: $selectedStyle,
+                        size: $selectedSize,
+                        isLoading: $isLoading,
+                        image: $selectedImage
+                    )
+                }
             }
         }
     }
@@ -73,14 +92,6 @@ struct CollectionContent: View {
                     isPresented = true
                 }
         }
-        .fullScreenCover(isPresented: $isPresented) {
-            ImageDetails(
-                quantity: $selectedQuantity,
-                style: $selectedStyle,
-                size: $selectedSize,
-                image: $selectedImage
-            )
-        }
     }
 
     func sequenceOfImages() -> some View {
@@ -89,7 +100,6 @@ struct CollectionContent: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 256, height: 256)
-                .cornerRadius(8)
                 .background(.brown)
                 .onTapGesture {
                     selectedImage = image
@@ -100,13 +110,5 @@ struct CollectionContent: View {
                 }
         }
         .padding(.bottom, 20)
-        .fullScreenCover(isPresented: $isPresented) {
-            ImageDetails(
-                quantity: $selectedQuantity,
-                style: $selectedStyle,
-                size: $selectedSize,
-                image: $selectedImage
-            )
-        }
     }
 }

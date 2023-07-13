@@ -17,7 +17,6 @@ struct Panel: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             VStack {
-                let _ = print("--> \(isLoading)")
                 if !modelData.images.isEmpty, !isLoading {
                     CollectionContent(
                         isSideBar: false

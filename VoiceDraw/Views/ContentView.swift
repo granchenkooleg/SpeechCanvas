@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection: Tab = .canvas
-    
+
     enum Tab {
         case canvas
         case list

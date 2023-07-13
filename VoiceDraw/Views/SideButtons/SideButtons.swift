@@ -19,7 +19,7 @@ struct SideButtons: View {
         VStack {
             DropdownSelector(
                 shouldShowDropdown: $shouldShowDropdownQuantity.onChange(stateChanged1),
-                placeholder: "1",
+                placeholder: quantitySelection,
                 options: SideButtonsModel.quantity,
                 onOptionSelected: { quantity in
                     quantitySelection = quantity.value
@@ -28,7 +28,7 @@ struct SideButtons: View {
 
             DropdownSelector(
                 shouldShowDropdown: $shouldShowDropdownStyle.onChange(stateChanged2),
-                placeholder: "Pixar",
+                placeholder: styleSelection,
                 options: SideButtonsModel.styles,
                 onOptionSelected: { style in
                     styleSelection = style.value
@@ -37,7 +37,7 @@ struct SideButtons: View {
 
             DropdownSelector(
                 shouldShowDropdown:  $shouldShowDropdownSize.onChange(stateChanged3),
-                placeholder: "256x256",
+                placeholder: sizeSelection,
                 options: SideButtonsModel.sizes,
                 onOptionSelected: { size in
                     sizeSelection = size.value

@@ -11,7 +11,7 @@ struct ImageDetails: View {
     @Binding var quantity: String
     @Binding var style: String
     @Binding var size: String
-    @State private var isLoading: Bool = false
+    @Binding var isLoading: Bool
     @Binding var image: UIImage?
     @Environment(\.dismiss) var dismiss
 
