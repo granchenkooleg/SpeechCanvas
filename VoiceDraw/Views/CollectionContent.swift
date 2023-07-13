@@ -23,37 +23,55 @@ struct CollectionContent: View {
     var body: some View {
         GeometryReader { geometry in
             if isSideBar {
-                ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(modelData.histories) { history in
-                        VStack(alignment: .leading, spacing: 5) {
-                            VStack(alignment: .leading, spacing: 0) {
-                                Text(history.date, format: .dateTime
-                                    .hour().minute().day().month().year())
-                                Text(history.transcript)
-                            }
-                            .padding(10)
-                            .background(CustomColor.lightOrange)
-                            .cornerRadius(4)
+                VStack(spacing: 0) {
+                    HStack {
+                        Spacer()
+                        Text("Recent")
                             .foregroundColor(colorScheme == .dark ? .black : .white)
-
-                            LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
-                                sequenceImagesSideBar(of: history)
-                            }
+                        Spacer()
+                        Button("Clear") {
+                            modelData.histories.removeAll()
                         }
-                        .padding([.leading, .bottom, .trailing], 10)
+                        .padding(.trailing, 20)
+                    }
+                    .frame(height: 44)
+                    .background(colorScheme == .dark ? .white: .black)
+
+                    Divider()
+
+                    ScrollView(.vertical, showsIndicators: false) {
+                        ForEach(modelData.histories) { history in
+                            VStack(alignment: .leading, spacing: 5) {
+                                VStack(alignment: .leading, spacing: 0) {
+                                    Text(history.date, format: .dateTime
+                                        .hour().minute().day().month().year())
+                                    Text(history.transcript)
+                                }
+                                .padding(10)
+                                .background(CustomColor.lightOrange)
+                                .cornerRadius(4)
+                                .foregroundColor(colorScheme == .dark ? .black : .white)
+
+                                LazyVGrid(columns: gridItemLayoutSideBar, spacing: 0) {
+                                    sequenceImagesSideBar(of: history)
+                                }
+                            }
+                            .padding([.leading, .bottom, .trailing], 10)
+                        }
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .background(colorScheme == .dark ? .white: .black)
+                    .padding(.horizontal, 5)
+                    .fullScreenCover(isPresented: $isPresented) {
+                        ImageDetails(
+                            quantity: $selectedQuantity,
+                            style: $selectedStyle,
+                            size: $selectedSize,
+                            image: $selectedImage
+                        )
                     }
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(.white)
-                .padding(.horizontal, 5)
-                .fullScreenCover(isPresented: $isPresented) {
-                    ImageDetails(
-                        quantity: $selectedQuantity,
-                        style: $selectedStyle,
-                        size: $selectedSize,
-                        image: $selectedImage
-                    )
-                }
+
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: gridItemLayoutSideBariPhone) {
@@ -79,7 +97,6 @@ struct CollectionContent: View {
                 .resizable()
                 .scaledToFit()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                .background(.brown)
                 .border(.black)
                 .onTapGesture {
                     selectedImage = image
@@ -97,7 +114,6 @@ struct CollectionContent: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 256, height: 256)
-                .background(.brown)
                 .onTapGesture {
                     selectedImage = image
                     selectedQuantity = modelData.histories.last?.quantity ?? ""
