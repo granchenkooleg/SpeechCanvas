@@ -44,7 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5C4A9A0A291BAAD700D2B2B5 /* VoiceDraw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceDraw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C4A9A0A291BAAD700D2B2B5 /* AI-ART.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI-ART.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4A9A0D291BAAD700D2B2B5 /* VoiceDrawApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceDrawApp.swift; sourceTree = "<group>"; };
 		5C4A9A0F291BAAD700D2B2B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		5C4A9A01291BAAD700D2B2B5 = {
 			isa = PBXGroup;
 			children = (
-				5C4A9A0C291BAAD700D2B2B5 /* VoiceDraw */,
+				5C4A9A0C291BAAD700D2B2B5 /* AI-ART */,
 				5C4A9A0B291BAAD700D2B2B5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,26 +104,25 @@
 		5C4A9A0B291BAAD700D2B2B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5C4A9A0A291BAAD700D2B2B5 /* VoiceDraw.app */,
+				5C4A9A0A291BAAD700D2B2B5 /* AI-ART.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5C4A9A0C291BAAD700D2B2B5 /* VoiceDraw */ = {
+		5C4A9A0C291BAAD700D2B2B5 /* AI-ART */ = {
 			isa = PBXGroup;
 			children = (
-				9EED780E2A4A1B5C00525298 /* Info.plist */,
 				5C4A9A0D291BAAD700D2B2B5 /* VoiceDrawApp.swift */,
+				9EED78192A4DD0D600525298 /* Extensions */,
+				9EED780E2A4A1B5C00525298 /* Info.plist */,
 				9E9768C52A3738F70005D51E /* Models */,
 				9E9768C62A37397A0005D51E /* Views */,
-				5C4A9A21291BB10A00D2B2B5 /* Secret.swift */,
-				9EED78192A4DD0D600525298 /* Extensions */,
 				9E9768C72A3746940005D51E /* NetworkLayer */,
-				9EADB38D2A44899A006F184E /* Resources */,
+				5C4A9A21291BB10A00D2B2B5 /* Secret.swift */,
 				5C4A9A11291BAAD700D2B2B5 /* Assets.xcassets */,
 				5C4A9A13291BAAD700D2B2B5 /* Preview Content */,
 			);
-			path = VoiceDraw;
+			path = "AI-ART";
 			sourceTree = "<group>";
 		};
 		5C4A9A13291BAAD700D2B2B5 /* Preview Content */ = {
@@ -205,13 +204,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		9EADB38D2A44899A006F184E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		9EED78142A4D978900525298 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,9 +226,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5C4A9A09291BAAD700D2B2B5 /* VoiceDraw */ = {
+		5C4A9A09291BAAD700D2B2B5 /* AI-ART */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "VoiceDraw" */;
+			buildConfigurationList = 5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "AI-ART" */;
 			buildPhases = (
 				5C4A9A06291BAAD700D2B2B5 /* Sources */,
 				5C4A9A07291BAAD700D2B2B5 /* Frameworks */,
@@ -246,9 +238,9 @@
 			);
 			dependencies = (
 			);
-			name = VoiceDraw;
+			name = "AI-ART";
 			productName = DallETutorial;
-			productReference = 5C4A9A0A291BAAD700D2B2B5 /* VoiceDraw.app */;
+			productReference = 5C4A9A0A291BAAD700D2B2B5 /* AI-ART.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -266,7 +258,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "VoiceDraw" */;
+			buildConfigurationList = 5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "AI-ART" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -279,7 +271,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5C4A9A09291BAAD700D2B2B5 /* VoiceDraw */,
+				5C4A9A09291BAAD700D2B2B5 /* AI-ART */,
 			);
 		};
 /* End PBXProject section */
@@ -460,11 +452,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"VoiceDraw/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"AI-ART/Preview Content\"";
 				DEVELOPMENT_TEAM = BKAQCZMCHY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VoiceDraw/Info.plist;
+				INFOPLIST_FILE = "AI-ART/Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio is recorded to transcribe the meeting. Audio recordings are discarded after transcription.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Needed to save your generated images";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
@@ -493,11 +485,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"VoiceDraw/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"AI-ART/Preview Content\"";
 				DEVELOPMENT_TEAM = BKAQCZMCHY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VoiceDraw/Info.plist;
+				INFOPLIST_FILE = "AI-ART/Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio is recorded to transcribe the meeting. Audio recordings are discarded after transcription.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Needed to save your generated images";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
@@ -522,7 +514,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "VoiceDraw" */ = {
+		5C4A9A05291BAAD700D2B2B5 /* Build configuration list for PBXProject "AI-ART" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5C4A9A16291BAAD700D2B2B5 /* Debug */,
@@ -531,7 +523,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "VoiceDraw" */ = {
+		5C4A9A18291BAAD700D2B2B5 /* Build configuration list for PBXNativeTarget "AI-ART" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5C4A9A19291BAAD700D2B2B5 /* Debug */,
