@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct BottomView: View {
+    var tappedBoxes: String?
     @State var image: UIImage?
     @Environment(\.dismiss) var dismiss
     @State private var prompt: String = ""
@@ -64,7 +65,8 @@ struct BottomView: View {
                                     with: promptWithSelectedStyle,
                                     quantity: quantitySelected,
                                     style: styleSelected,
-                                    size: sizeSelected
+                                    size: sizeSelected,
+                                    transparentSquares: tappedBoxes
                                 )
 
                             } else {

@@ -41,14 +41,15 @@ class DallEImageGenerator {
         url: URL,
         from prompt: String,
         quantity: String,
-        size: String
+        size: String,
+        transparentSquares: String? = nil
     ) async throws -> ImageGenerationResponse {
 
         //        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
         //            throw ImageError.inValidPrompt
         //        }
 
-        let parameters = [
+        var parameters = [
             [
                 "key": "prompt",
                 "value": prompt,
@@ -63,13 +64,18 @@ class DallEImageGenerator {
                 "key": "size",
                 "value": size,
                 "type": "text"
-            ],
-            [
-                "key": "transparent_squares",
-                "value": "2,3,6,7,10,11,14,15",
-                "type": "text"
             ]
         ] as [[String: Any]]
+
+        if let transparentSquares = transparentSquares {
+            let tappedSquares = [
+                "key": "transparent_squares",
+                "value": transparentSquares,
+                "type": "text"
+            ]
+            parameters.append(tappedSquares as [String : Any])
+        }
+
 
         let boundary = "Boundary-\(UUID().uuidString)"
         let body = NSMutableData()

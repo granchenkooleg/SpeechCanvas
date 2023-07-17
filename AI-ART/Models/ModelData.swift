@@ -13,7 +13,7 @@ final class ModelData: ObservableObject {
     @Published var isLoading = false
     @Published var showingAlert = false
     @Published var images: [UIImage] = [
-//                UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!, UIImage(systemName: "cursorarrow.motionlines.click")!
+                UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!, UIImage(systemName: "cursorarrow.motionlines.click")!
     ]
     @Published var histories: [History] = [
 //                History(
@@ -40,7 +40,8 @@ final class ModelData: ObservableObject {
         with prompt: String,
         quantity: String,
         style: String,
-        size: String
+        size: String,
+        transparentSquares: String? = nil
     ) async throws {
         do {
             images.removeAll()
@@ -50,7 +51,8 @@ final class ModelData: ObservableObject {
                 url: url,
                 from: prompt,
                 quantity: quantity,
-                size: size
+                size: size,
+                transparentSquares: transparentSquares
             )
 
             for data in response.data {
