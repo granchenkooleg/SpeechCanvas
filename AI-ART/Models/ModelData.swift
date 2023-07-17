@@ -13,7 +13,7 @@ final class ModelData: ObservableObject {
     @Published var isLoading = false
     @Published var showingAlert = false
     @Published var images: [UIImage] = [
-                UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!, UIImage(systemName: "cursorarrow.motionlines.click")!
+//                UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!, UIImage(systemName: "cursorarrow.motionlines.click")!
     ]
     @Published var histories: [History] = [
 //                History(

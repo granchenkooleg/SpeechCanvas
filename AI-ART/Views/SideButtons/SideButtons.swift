@@ -29,7 +29,7 @@ struct SideButtons: View {
             DropdownSelector(
                 shouldShowDropdown: $shouldShowDropdownStyle.onChange(stateChanged2),
                 placeholder: styleSelection,
-                options: SideButtonsModel.styles,
+                options: SideButtonsModel.styles.sorted(by: <),
                 onOptionSelected: { style in
                     styleSelection = style.value
                 })

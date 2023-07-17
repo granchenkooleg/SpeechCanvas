@@ -7,11 +7,16 @@
 import Foundation
 import SwiftUI
 
-struct DropdownOption: Hashable {
+struct DropdownOption: Hashable, Comparable {
     let key: String
     let value: String
+
     public static func == (lhs: DropdownOption, rhs: DropdownOption) -> Bool {
         return lhs.key == rhs.key
+    }
+    
+    static func < (lhs: DropdownOption, rhs: DropdownOption) -> Bool {
+        lhs.value < rhs.value
     }
 }
 
@@ -53,7 +58,8 @@ struct SideButtonsModel {
         DropdownOption(key: "🟦", value: "Photorealism"),
         DropdownOption(key: "🟪", value: "Retro/Vintage"),
         DropdownOption(key: "⬛️", value: "Van Gogh"),
-        DropdownOption(key: "🟫", value: "Art Deco")
+        DropdownOption(key: "🟫", value: "Art Deco"),
+        DropdownOption(key: "✏️", value: "Graffiti")
 //        DropdownOption(key: uniqueKey, value: "3"),
 //        DropdownOption(key: uniqueKey, value: "4"),
 //        DropdownOption(key: uniqueKey, value: "5"),
