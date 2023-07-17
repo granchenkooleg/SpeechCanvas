@@ -12,6 +12,7 @@ import SwiftUI
 final class ModelData: ObservableObject {
     @Published var isLoading = false
     @Published var showingAlert = false
+    @Published var descriptionAlert: String?
     @Published var images: [UIImage] = [
 //                UIImage(systemName: "figure.stand.line.dotted.figure.stand")!, UIImage(systemName: "figure.roll")!, UIImage(systemName: "mic")!, UIImage(systemName: "cursorarrow.motionlines.click")!
     ]
@@ -72,10 +73,11 @@ final class ModelData: ObservableObject {
             )
             isLoading = false
         } catch {
-            await MainActor.run {
-                self.showingAlert = true
-            }
+            self.showingAlert = true
             print("⚠️⚠️⚠️ \(error.localizedDescription)")
+            if (error as? ImageError) == AI_ART.ImageError.inValidPrompt {
+                descriptionAlert = "Violating OpenAI's content policy"
+            }
         }
     }
 }

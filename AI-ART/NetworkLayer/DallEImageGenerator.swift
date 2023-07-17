@@ -5,15 +5,15 @@ enum ImageError: Error {
 }
 
 class DallEImageGenerator {
-    let api_key = Secrets.apiKey
+    let apiKey = Secrets.apiKey
     static let shared = DallEImageGenerator()
     let sessionID = UUID().uuidString
     
     private init() { }
     
     func makeSurePromptIsValid(
-        _ prompt: String,
-        apiKey: String
+        _ prompt: String
+//        apiKey: String
     ) async throws -> Bool {
         guard let url = URL(string: "https://api.openai.com/v1/moderations") else {
             throw ImageError.badURL
@@ -32,7 +32,10 @@ class DallEImageGenerator {
         
         let (response, _) = try await URLSession.shared.data(for: request)
         let result = try JSONDecoder().decode(ModerationResponse.self, from: response)
-        
+        let responseString = String(data: response, encoding: .utf8)
+
+        print("Server response: \(responseString ?? "")")
+
         return result.hasIssues == false
     }
 
@@ -45,9 +48,9 @@ class DallEImageGenerator {
         transparentSquares: String? = nil
     ) async throws -> ImageGenerationResponse {
 
-        //        guard try await makeSurePromptIsValid(prompt, apiKey: apiKey) else {
-        //            throw ImageError.inValidPrompt
-        //        }
+        guard try await makeSurePromptIsValid(prompt) else {
+            throw ImageError.inValidPrompt
+        }
 
         var parameters = [
             [
@@ -107,7 +110,7 @@ class DallEImageGenerator {
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
 
         var request = URLRequest(url: url)
-        request.addValue(Secrets.apiKey, forHTTPHeaderField: "Authorization")
+        request.addValue(apiKey, forHTTPHeaderField: "Authorization")
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"

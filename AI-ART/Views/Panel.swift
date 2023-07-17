@@ -60,9 +60,11 @@ struct Panel: View {
             )
                 .offset(y: -170)
         }
-        .alert("Something wrong ⚠️", isPresented: $modelData.showingAlert) {
-                    Button("OK", role: .cancel) { }
-                }
+        .alert(Text(modelData.descriptionAlert ?? "Something wrong ⚠️"), isPresented: $modelData.showingAlert) {
+            Button("OK", role: .cancel) {
+                modelData.isLoading = false
+            }
+        }
     }
 }
 
