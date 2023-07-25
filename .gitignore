@@ -25,8 +25,8 @@ DerivedData/
 ## Obj-C/Swift specific
 *.hmap
 
-# Ignore .xcconfig file
-Secrets.xcconfig
+# Ignore all .xcconfig files
+*.xcconfig
 
 ## App packaging
 *.ipa
