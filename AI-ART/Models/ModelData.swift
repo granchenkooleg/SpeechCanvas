@@ -80,4 +80,43 @@ final class ModelData: ObservableObject {
             }
         }
     }
+
+    func generateEditedImage(
+        for imageData: Data? = nil,
+        url: URL,
+        from prompt: String,
+        quantity: String,
+        style: String,
+        size: String
+    ) async throws {
+        do {
+            let response = try await DallEImageGenerator.shared.generateEditedImage(
+                for: imageData,
+                url: url,
+                from: prompt,
+                quantity: quantity,
+                size: size
+            )
+
+            for data in response.data {
+                let (data, _) = try await URLSession.shared.data(from: data.url)
+                images.append(UIImage(data: data)!)
+            }
+
+            histories.append(
+                History(
+                    date: Date(),
+                    images: images,
+                    transcript: prompt,
+                    quantity: quantity,
+                    style: style,
+                    size: size
+                )
+            )
+        } catch {
+            self.showingAlert = true
+            print("⚠️⚠️⚠️ \(error.localizedDescription)")
+        }
+    }
+
 }

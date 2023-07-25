@@ -59,15 +59,27 @@ struct BottomView: View {
                         dismiss()
                         Task {
                             if let image = image {
-                                try await modelData.generateImage(
-                                    for: image.pngData(),
-                                    url: URL(string: VoiceDrawEndpoint.editImageURL)!,
-                                    with: promptWithSelectedStyle,
-                                    quantity: quantitySelected,
-                                    style: styleSelected,
-                                    size: sizeSelected,
-                                    transparentSquares: tappedBoxes
-                                )
+//                                try await modelData.generateImage(
+//                                    for: image.pngData(),
+//                                    url: URL(string: VoiceDrawEndpoint.editImageURL)!,
+//                                    with: promptWithSelectedStyle,
+//                                    quantity: quantitySelected,
+//                                    style: styleSelected,
+//                                    size: sizeSelected,
+//                                    transparentSquares: tappedBoxes
+//                                )
+
+                                if !image.hasAlpha {
+                                    let imageWithAlpha = try image.imageWithAlpha(alpha: 1)
+                                    try await modelData.generateEditedImage(
+                                        for: imageWithAlpha.pngData(),
+                                        url: URL(string: VoiceDrawEndpoint.editImageURL)!,
+                                        from: promptWithSelectedStyle,
+                                        quantity: quantitySelected,
+                                        style: styleSelected,
+                                        size: sizeSelected
+                                    )
+                                }
 
                             } else {
                                 try await modelData.generateImage(

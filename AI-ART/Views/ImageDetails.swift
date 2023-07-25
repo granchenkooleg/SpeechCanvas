@@ -90,7 +90,7 @@ struct TappableSquare: View {
     var body: some View {
 
         Rectangle()
-            .fill(isTapped ? .blue.opacity(0.1) : .blue.opacity(0.0001))
+            .fill(isTapped ? .blue.opacity(0.3) : .blue.opacity(0.0001))
             .frame(width: 100, height: 100)
             .gesture(TapGesture().onEnded { _ in
                 isTapped.toggle()

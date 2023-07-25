@@ -7,10 +7,11 @@ import Foundation
 
 struct VoiceDrawEndpoint {
     static var generateURL: String {
-        "http://74.235.97.111/api/generate/"
+        "https://api.openai.com/v1/images/generations"
     }
+
     static var editImageURL: String {
-        "http://74.235.97.111/api/edit/"
+        "https://api.openai.com/v1/images/edits"
     }
 
 }
