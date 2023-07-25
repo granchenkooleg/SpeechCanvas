@@ -12,5 +12,13 @@ struct Helper {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
+
+    static func readKeyFromInfoDictionary(key: String) -> String? {
+        if let infoDictionary = Bundle.main.infoDictionary,
+           let value = infoDictionary[key] as? String {
+            return value
+        }
+        return nil
+    }
 }
 
